@@ -1,4 +1,3 @@
-
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const params = new URLSearchParams(location.search);
@@ -246,5 +245,3 @@
   else if (path.endsWith('/business/card.html')) initCard();
   else initEntry();
 })();
-
-```

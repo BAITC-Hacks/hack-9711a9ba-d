@@ -1,4 +1,3 @@
-
 /* Shared JSON API client. Set window.API_BASE before this file to change the API prefix. */
 (() => {
   const base = (window.API_BASE || '/api').replace(/\/$/, '');
@@ -47,5 +46,3 @@
     clearId(name) { localStorage.removeItem(`aiSana.${name}`); }
   };
 })();
-
-```
