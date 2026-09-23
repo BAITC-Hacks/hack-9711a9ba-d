@@ -16,7 +16,11 @@
     "constraints_confirmed": 0,
     "users_confirmed": 0,
     "business_contact_confirmed": 0,
-    "published": 0
+    "published": 1,
+    "title": "ИИ для магазина",
+    "topic": "Ритейл",
+    "need": "Уточнить бизнес-проблему магазина.",
+    "interaction_format": ""
   },
   {
     "id": 2,
@@ -35,7 +39,11 @@
     "constraints_confirmed": 0,
     "users_confirmed": 0,
     "business_contact_confirmed": 0,
-    "published": 1
+    "published": 1,
+    "title": "Прогноз спроса на выпечку",
+    "topic": "HoReCa",
+    "need": "Уменьшить списания выпечки.",
+    "interaction_format": ""
   },
   {
     "id": 3,
@@ -54,7 +62,11 @@
     "constraints_confirmed": 0,
     "users_confirmed": 0,
     "business_contact_confirmed": 0,
-    "published": 1
+    "published": 1,
+    "title": "Помощник для абитуриентов",
+    "topic": "Образование",
+    "need": "Сократить повторяющиеся вопросы приёмной комиссии.",
+    "interaction_format": "Онлайн, обратная связь раз в неделю."
   },
   {
     "id": 4,
@@ -73,7 +85,11 @@
     "constraints_confirmed": 1,
     "users_confirmed": 1,
     "business_contact_confirmed": 0,
-    "published": 1
+    "published": 1,
+    "title": "Риск дефицита товаров",
+    "topic": "Логистика",
+    "need": "Заранее выявлять дефицит товаров.",
+    "interaction_format": "Онлайн, разбор отчёта с закупщиком раз в неделю."
   },
   {
     "id": 5,
@@ -92,6 +108,10 @@
     "constraints_confirmed": 1,
     "users_confirmed": 1,
     "business_contact_confirmed": 1,
-    "published": 1
+    "published": 1,
+    "title": "Рекомендации упражнений",
+    "topic": "Образование",
+    "need": "Помогать студентам отрабатывать слабые темы.",
+    "interaction_format": "Онлайн, проверка рекомендаций преподавателем."
   }
 ]

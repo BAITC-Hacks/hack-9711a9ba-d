@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-function calculateRating(array $card): array
+function ratingWeights(): array
 {
-    $weights = [
+    return [
         'context' => 20,
         'data_materials' => 20,
         'expected_result' => 15,
@@ -13,14 +13,10 @@ function calculateRating(array $card): array
         'business_contact' => 10,
     ];
 
-    $rating = 0;
-    foreach ($weights as $field => $weight) {
-        $confirmed = $card[$field . '_confirmed'] ?? 0;
-        if (in_array($confirmed, [1, '1', true], true)) {
-            $rating += $weight;
-        }
-    }
+}
 
+function ratingLevel(int $rating): string
+{
     if ($rating < 40) {
         $level = 'проект';
     } elseif ($rating < 70) {
@@ -31,5 +27,34 @@ function calculateRating(array $card): array
         $level = 'приоритет';
     }
 
-    return ['rating' => $rating, 'level' => $level];
+    return $level;
+}
+
+function ratingDetails(array $card): array
+{
+    $rating = 0;
+    $breakdown = [];
+    $missing = [];
+    foreach (ratingWeights() as $field => $weight) {
+        $text = $card[$field] ?? '';
+        $filled = is_string($text) && preg_match('/\S/u', $text) === 1;
+        $confirmed = in_array($card[$field . '_confirmed'] ?? 0, [1, '1', true], true);
+        $points = $filled && $confirmed ? $weight : 0;
+        $rating += $points;
+        $breakdown[] = ['field' => $field, 'weight' => $weight, 'points' => $points,
+            'filled' => $filled, 'confirmed' => $confirmed];
+        if ($points === 0) {
+            $missing[] = ['field' => $field, 'potential_points' => $weight,
+                'reason' => $filled ? 'not_confirmed' : 'empty',
+                'action' => $filled ? 'Подтвердите поле' : 'Заполните и подтвердите поле'];
+        }
+    }
+    return ['rating' => $rating, 'level' => ratingLevel($rating),
+        'breakdown' => $breakdown, 'missing_fields' => $missing];
+}
+
+function calculateRating(array $card): array
+{
+    $details = ratingDetails($card);
+    return ['rating' => $details['rating'], 'level' => $details['level']];
 }

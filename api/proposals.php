@@ -28,7 +28,10 @@ api(['GET', 'POST'], function (PDO $db, string $method): void {
         fail('deadline должен быть корректной датой в формате YYYY-MM-DD');
     }
     $id = transaction($db, function () use ($db, $cardId, $teamId, $idea, $plan, $link, $deadline): int {
-        findRow($db, 'cards', $cardId);
+        $card = findRow($db, 'cards', $cardId);
+        if ((int) $card['published'] !== 1) {
+            fail('Отправить предложение можно после публикации карточки', 409);
+        }
         findRow($db, 'teams', $teamId);
         $db->prepare('INSERT INTO proposals
             (card_id, team_id, solution_idea, plan, prototype_link, deadline)
