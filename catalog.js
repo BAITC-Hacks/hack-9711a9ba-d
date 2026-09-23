@@ -1,0 +1,1 @@
+window.Catalog={list({industry='',min=0,sort='score'}={}){return SanaAPI.all().tasks.filter(t=>t.published&&(!industry||t.industry===industry)&&t.score>=Number(min)).sort((a,b)=>sort==='score'?b.score-a.score:a.title.localeCompare(b.title));}};

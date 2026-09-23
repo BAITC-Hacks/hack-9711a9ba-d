@@ -1,0 +1,8 @@
+window.Business = {
+  weights:{context:20,data:20,result:15,success:15,constraints:10,users:10,contact:10},
+  fields:[['title','Название'],['industry','Отрасль'],['context','Контекст'],['need','Потребность'],['users','Для кого создаём'],['data','Данные и материалы'],['result','Ожидаемый результат'],['success','Критерии успеха'],['constraints','Ограничения'],['contact','Контакт и обратная связь'],['format','Формат взаимодействия']],
+  score(t){return Object.entries(this.weights).reduce((n,[k,w])=>n+(String(t[k]||'').trim().length>=12?w:0),0);},
+  level(s){return s>=90?'Приоритетная':s>=70?'Готовая':s>=40?'Рабочая':'Черновик';},
+  questions(t){const q=[];if(!t.context||t.context.length<35)q.push(['context','Что происходит сейчас и в чём именно сложность?']);if(!t.data||t.data.length<12)q.push(['data','Какие данные, примеры или материалы уже доступны?']);if(!t.result||t.result.length<12)q.push(['result','Какой конкретный результат вы хотели бы получить от команды?']);if(!t.success||t.success.length<12)q.push(['success','По каким измеримым признакам вы поймёте, что решение сработало?']);if(!t.constraints||t.constraints.length<12)q.push(['constraints','Есть ли сроки, технологические требования или ограничения по доступу?']);if(!t.users||t.users.length<12)q.push(['users','Кто будет пользоваться решением?']);if(!t.contact||t.contact.length<12)q.push(['contact','Кто сможет отвечать на вопросы и как часто команда сможет получать обратную связь?']);return q.slice(0,5);},
+  suggestions(t){return Object.entries(this.weights).filter(([k])=>String(t[k]||'').trim().length<12).map(([k,w])=>({field:k,label:this.fields.find(f=>f[0]===k)?.[1]||k,points:w}));}
+};
