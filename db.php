@@ -11,7 +11,7 @@ try {
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(
-        ['error' => 'Не удалось подключиться к базе данных'],
+        ['error' => 'Не ! удалось подключиться к базе данных'],
         JSON_UNESCAPED_UNICODE
     );
     exit;
