@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/_common.php';
 require_once __DIR__ . '/../rating.php';
+require_once __DIR__ . '/../ai_helper.php';
 
 api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
     if ($method === 'GET') {
@@ -10,6 +11,33 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
     }
     $data = body();
     if ($method === 'POST') {
+        // AI preparation happens before the short SQLite write transaction.
+        // The source description always comes from the saved task.
+        if (array_key_exists('action', $data)) {
+            $action = $data['action'];
+            if (!in_array($action, ['questions', 'build'], true)) {
+                fail('action должен быть questions или build');
+            }
+            onlyKeys($data, $action === 'questions'
+                ? ['action', 'task_id'] : ['action', 'task_id', 'answers']);
+            $taskId = positiveId($data['task_id'] ?? null, 'task_id');
+            $task = findRow($db, 'tasks', $taskId);
+            try {
+                if ($action === 'questions') {
+                    respond(['task_id' => $taskId,
+                        'questions' => generateQuestions($task['raw_description'])]);
+                    return;
+                }
+                if (!isset($data['answers']) || !$data['answers'] instanceof stdClass) {
+                    fail('answers должен быть JSON-объектом с ответами по полям');
+                }
+                $cardJson = buildCardFromAnswers($task['raw_description'], (array) $data['answers']);
+                // buildCardFromAnswers validates both AI and fallback before returning.
+                $data = ['task_id' => $taskId] + json_decode($cardJson, true, 32, JSON_THROW_ON_ERROR);
+            } catch (InvalidArgumentException $e) {
+                fail($e->getMessage(), 422);
+            }
+        }
         onlyKeys($data, array_merge(['task_id'], CARD_FIELDS));
         $taskId = positiveId($data['task_id'] ?? null, 'task_id');
         $values = [$taskId];

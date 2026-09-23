@@ -46,4 +46,12 @@ AI Sana — MVP платформы для связи бизнеса и кома�
 │   ├── cards_seed.json
 │   ├── teams_seed.json
 │   └── proposals_seed.json
-└── README.mdd
+└── README.md
+```
+
+## Реализованный ИИ-помощник
+
+`ai_helper.php` находится в корне проекта, PHP endpoints — в `api/`.
+Генерация уточняющих вопросов, сборка карточки, внешний API с локальным fallback,
+валидация и последовательность интеграции описаны в [AI_HELPER.md](AI_HELPER.md).
+Контракт backend и запуск: [API.md](API.md).
