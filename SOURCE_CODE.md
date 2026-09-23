@@ -8,7 +8,7 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f6f7f2"><title>Карточка задачи — AI Sana</title><link rel="stylesheet" href="../css/style.css"></head>
 <body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div><a class="navitem active" href="card.html">▦ &nbsp; Карточка задачи</a><div class="sidebar-note"><span>✦</span><b>Вы подтверждаете<br>каждое поле.</b><small>Рейтинг обновится после подтверждения.</small></div></aside>
-<main class="content"><header class="topbar"><div>Кабинет бизнеса <span>/</span> Карточка задачи</div><span class="top-pill">ШАГ 3 · ПРОВЕРКА</span></header><section class="page"><div class="step-line"><span>ШАГ 3 ИЗ 4</span><div><i class="active"></i><i class="active"></i><i class="active"></i><i></i></div></div><div class="eyebrow">ПРОВЕРЬТЕ И ПОДТВЕРДИТЕ</div><h1>Карточка задачи</h1><p class="intro">Отредактируйте формулировки и подтвердите поля, которые готовы к публикации. Только подтверждённые сведения учитываются в рейтинге.</p><div class="card-layout"><section id="card-fields" class="field-list"><div class="loading">Загружаю карточку…</div></section><aside class="rating-panel"><div class="eyebrow">РЕЙТИНГ ГОТОВНОСТИ</div><div id="rating-widget"></div><div class="rating-criteria"><b>Баллы за поля</b><span>Контекст и потребность <i>20</i></span><span>Данные и материалы <i>20</i></span><span>Ожидаемый результат <i>15</i></span><span>Критерии успеха <i>15</i></span><span>Ограничения <i>10</i></span><span>Пользователи <i>10</i></span><span>Связь с бизнесом <i>10</i></span></div><div class="rating-help">Рейтинг зависит от полноты подтверждённой карточки, а не от популярности компании.</div><button id="publish-button" class="btn primary publish-btn" type="button" hidden>Опубликовать задачу →</button><p id="publish-hint" class="publish-hint">Для публикации подтвердите поля и наберите минимум 40 баллов.</p></aside></div><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana <span>·</span> От задачи до результата</footer></main></div><script src="../js/api.js"></script><script src="../js/ratings.js"></script><script src="../js/business.js"></script><script src="../js/navigation.js"></script></body></html>
+<main class="content"><header class="topbar"><div>Кабинет бизнеса <span>/</span> Карточка задачи</div><span class="top-pill">ШАГ 3 · ПРОВЕРКА</span></header><section class="page"><div class="step-line"><span>ШАГ 3 ИЗ 4</span><div><i class="active"></i><i class="active"></i><i class="active"></i><i></i></div></div><div class="eyebrow">ПРОВЕРЬТЕ И ПОДТВЕРДИТЕ</div><h1>Карточка задачи</h1><p class="intro">Отредактируйте формулировки и подтвердите поля, которые готовы к публикации. Только подтверждённые сведения учитываются в рейтинге.</p><div class="card-layout"><section id="card-fields" class="field-list"><div class="loading">Загружаю карточку…</div></section><aside class="rating-panel"><div class="eyebrow">РЕЙТИНГ ГОТОВНОСТИ</div><div id="rating-widget"></div><div id="rating-criteria" class="rating-criteria"><b>Максимальные баллы</b><span>Контекст и потребность <i>20</i></span><span>Данные и материалы <i>20</i></span><span>Ожидаемый результат <i>15</i></span><span>Критерии успеха <i>15</i></span><span>Ограничения <i>10</i></span><span>Пользователи <i>10</i></span><span>Связь с бизнесом <i>10</i></span></div><div class="rating-help">Рейтинг зависит от полноты подтверждённой карточки, а не от популярности компании.</div><label id="publish-confirm-row" class="confirm-check publish-confirm"><input id="publish-confirm" type="checkbox"><span>Я проверил(а) карточку и подтверждаю её публикацию в общем каталоге</span></label><button id="publish-button" class="btn primary publish-btn" type="button" hidden>Опубликовать задачу →</button><p id="publish-hint" class="publish-hint">Проверьте карточку перед публикацией. Рейтинг отражает полноту подтверждённых сведений.</p></aside></div><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana <span>·</span> От задачи до результата</footer></main></div><script src="../js/api.js"></script><script src="../js/ratings.js"></script><script src="../js/business.js"></script><script src="../js/navigation.js"></script></body></html>
 
 ```
 
@@ -37,7 +37,7 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f6f7f2"><title>Уточнение задачи — AI Sana</title><link rel="stylesheet" href="../css/style.css"></head>
 <body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div><a class="navitem active" href="new-task.html">✧ &nbsp; Уточнение задачи</a><div class="sidebar-note"><span>✦</span><b>Чем яснее задача,<br>тем точнее решения.</b><small>Ответы можно изменить в карточке до подтверждения.</small></div></aside>
-<main class="content"><header class="topbar"><div>Кабинет бизнеса <span>/</span> Уточнение задачи</div><span class="top-pill">AI-ПОМОЩНИК</span></header><section class="page narrow"><div class="step-line"><span>ШАГ 2 ИЗ 4</span><div><i class="active"></i><i class="active"></i><i></i><i></i></div></div><div class="eyebrow">AI SANA ПОМОГАЕТ УТОЧНИТЬ</div><h1>Добавим важные детали</h1><p class="intro">Ответьте на вопросы, чтобы командам было проще понять задачу и предложить подходящее решение.</p><div class="ai-note"><span class="ai-spark">✦</span><div><b>Уточняющие вопросы</b><p>Вопросы должны прийти из AI-модуля backend вместе с черновиком задачи.</p></div></div><form id="questions-form"><div id="questions-list" class="question-list"><div class="loading">Загружаю вопросы…</div></div><div class="panel-actions"><span>Ответы сохранятся в карточке как неподтверждённые сведения</span><button class="btn primary" type="submit">Сформировать карточку <b>→</b></button></div></form><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana <span>·</span> От задачи до результата</footer></main></div><script src="../js/api.js"></script><script src="../js/business.js"></script><script src="../js/navigation.js"></script></body></html>
+<main class="content"><header class="topbar"><div>Кабинет бизнеса <span>/</span> Уточнение задачи</div><span class="top-pill">AI-ПОМОЩНИК</span></header><section class="page narrow"><div class="step-line"><span>ШАГ 2 ИЗ 4</span><div><i class="active"></i><i class="active"></i><i></i><i></i></div></div><div class="eyebrow">AI SANA ПОМОГАЕТ УТОЧНИТЬ</div><h1>Добавим важные детали</h1><p class="intro">Ответьте на вопросы, чтобы командам было проще понять задачу и предложить подходящее решение.</p><div class="ai-note"><span class="ai-spark">✦</span><div><b>Уточняющие вопросы</b><p id="assistant-note">Помощник готовит вопросы по вашему описанию. Можно оставить ответ пустым, если данных пока нет.</p></div></div><form id="questions-form"><div id="questions-list" class="question-list"><div class="loading">Загружаю вопросы…</div></div><div class="panel-actions"><span>Ответы сохранятся в карточке как неподтверждённые сведения</span><button class="btn primary" type="submit">Сформировать карточку <b>→</b></button></div></form><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana <span>·</span> От задачи до результата</footer></main></div><script src="../js/api.js"></script><script src="../js/business.js"></script><script src="../js/navigation.js"></script></body></html>
 
 ```
 
@@ -154,6 +154,14 @@
 .detail-section p,.proposal-content p { white-space:pre-wrap; overflow-wrap:anywhere; }
 .api-empty { padding:18px; color:#a55246; }
 button:disabled { cursor:not-allowed; }
+/* Integrated form controls */
+.publish-confirm{margin-top:14px;align-items:flex-start;font-size:9px;line-height:1.5}
+.publish-confirm[hidden]{display:none}.publish-confirm input{flex:none;margin-top:2px}
+.proposal-actions{gap:8px;flex-wrap:wrap}.catalog-card{text-decoration:none;color:inherit}
+.existing-team-panel{margin-bottom:18px}.form-row select{width:100%;border:1px solid #e2e7e0;border-radius:6px;background:#fcfdfa;padding:10px 11px;font:10px var(--sans);color:#28352c}
+.proposal-team a{color:inherit;text-decoration:none}.proposal-team a:hover{text-decoration:underline}
+.rating-criteria>span{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;line-height:1.4}.rating-criteria>span>small{grid-column:1/-1;font-size:7px;color:#939c94}.rating-criteria i{float:none;white-space:nowrap}
+.team-profile{border-top:1px solid #eef0ec;margin-bottom:10px}.team-profile summary{padding:10px 0;cursor:pointer;font-size:9px;color:#55765a}
 
 ```
 
@@ -197,52 +205,63 @@ button:disabled { cursor:not-allowed; }
 ## frontend/js/api.js
 
 ```js
-/* Shared JSON API client. Set window.API_BASE before this file to change the API prefix. */
+/* All screens use the same PHP API. API_BASE can override its URL prefix. */
 (() => {
   const base = (window.API_BASE || '/api').replace(/\/$/, '');
-  const request = async (path, options = {}) => {
+  const request = async (path, options = {}, timeout = window.API_TIMEOUT_MS || 20000) => {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), window.API_TIMEOUT_MS || 20000);
+    const timer = setTimeout(() => controller.abort(), timeout);
     try {
-    const response = await fetch(`${base}${path}`, {
-      ...options,
-      signal: controller.signal,
-      cache: 'no-store',
-      headers: { Accept:'application/json', ...(options.body ? { 'Content-Type': 'application/json' } : {}), ...options.headers }
-    });
-    const raw = await response.text();
-    let data = null;
-    if (raw) { try { data = JSON.parse(raw); } catch { throw new Error(`Сервер вернул некорректный JSON (${response.status}). Проверьте адрес API.`); } }
-    if (!response.ok) throw new Error(data?.message || data?.error || `Ошибка API (${response.status})`);
-    if (data?.success === false || data?.error) throw new Error(data.message || (typeof data.error === 'string' ? data.error : 'Сервер отклонил запрос.'));
-    return data?.data ?? data;
+      const response = await fetch(`${base}${path}`, {
+        ...options, signal: controller.signal, cache: 'no-store',
+        headers: { Accept:'application/json', ...(options.body ? { 'Content-Type':'application/json' } : {}), ...options.headers }
+      });
+      const raw = await response.text();
+      let data = null;
+      if (raw) {
+        try { data = JSON.parse(raw); }
+        catch { throw new Error(`Сервер вернул некорректный ответ (${response.status}). Попробуйте обновить страницу.`); }
+      }
+      if (!response.ok || data?.success === false || data?.error) {
+        throw new Error(data?.message || (typeof data?.error === 'string' ? data.error : `Ошибка сервера (${response.status}).`));
+      }
+      return data?.data ?? data;
     } catch (error) {
       if (error.name === 'AbortError') throw new Error('Сервер не ответил вовремя. Проверьте результат перед повторной отправкой.');
-      if (error instanceof TypeError) throw new Error('Нет связи с сервером. Проверьте подключение и адрес API.');
+      if (error instanceof TypeError) throw new Error('Нет связи с сервером. Проверьте подключение и обновите страницу.');
       throw error;
     } finally { clearTimeout(timer); }
   };
   const json = (method, body) => ({ method, body: JSON.stringify(body) });
-
+  const aiTimeout = () => window.API_TIMEOUT_MS || 120000;
+  // Browsers may disable storage; this must not prevent API operations.
+  const memory = new Map();
+  const storage = {
+    get(name) { try { return localStorage.getItem(`aiSana.${name}`) ?? memory.get(name) ?? null; } catch { return memory.get(name) ?? null; } },
+    set(name, value) { memory.set(name, String(value)); try { localStorage.setItem(`aiSana.${name}`, String(value)); } catch {} },
+    remove(name) { memory.delete(name); try { localStorage.removeItem(`aiSana.${name}`); } catch {} }
+  };
   window.SanaAPI = {
     createTask: raw_description => request('/tasks.php', json('POST', { raw_description })),
     getTask: id => request(`/tasks.php?id=${encodeURIComponent(id)}`),
-    createCard: task_id => request('/cards.php', json('POST', { task_id })),
+    getQuestions: task_id => request('/cards.php', json('POST', { action:'questions', task_id }), aiTimeout()),
+    createCard: (task_id, answers = {}) => request('/cards.php', json('POST', { action:'build', task_id, answers }), aiTimeout()),
     updateCardField: payload => request('/cards.php', json('PATCH', payload)),
     getCard: id => request(`/cards.php?id=${encodeURIComponent(id)}`),
-    publishCard: card_id => request('/publish.php', json('POST', { card_id })),
-    getCatalog: filters => {
-      const query = new URLSearchParams({ sort:'rating', ...(filters || {}) });
-      return request(`/catalog.php?${query}`);
-    },
+    publishCard: card_id => request('/publish.php', json('PATCH', { card_id, published:true, confirmed:true })),
+    getCatalog: filters => request(`/catalog.php?${new URLSearchParams({ sort:'rating', ...(filters || {}) })}`),
+    getTeams: () => request('/teams.php'),
+    getTeam: id => request(`/teams.php?id=${encodeURIComponent(id)}`),
     createTeam: payload => request('/teams.php', json('POST', payload)),
+    updateTeam: (id, payload) => request('/teams.php', json('PATCH', { id, ...payload })),
     createProposal: payload => request('/proposals.php', json('POST', payload)),
     getProposalsForCard: card_id => request(`/proposals.php?card_id=${encodeURIComponent(card_id)}`),
     getProposalsForTeam: team_id => request(`/proposals.php?team_id=${encodeURIComponent(team_id)}`),
-    chooseProposal: proposal_id => request('/choose.php', json('PATCH', { proposal_id })),
-    saveId(name, value) { localStorage.setItem(`aiSana.${name}`, String(value)); },
-    getId(name) { return localStorage.getItem(`aiSana.${name}`); },
-    clearId(name) { localStorage.removeItem(`aiSana.${name}`); }
+    chooseProposal: (proposal_id, decision = 'accepted') => request('/choose.php', json('PATCH', { proposal_id, decision })),
+    saveId: storage.set, getId: storage.get, clearId: storage.remove,
+    saveDraft(name, value) { storage.set(`draft.${name}`, JSON.stringify(value)); },
+    getDraft(name, fallback = null) { try { return JSON.parse(storage.get(`draft.${name}`)) ?? fallback; } catch { return fallback; } },
+    clearDraft(name) { storage.remove(`draft.${name}`); }
   };
 })();
 
@@ -255,18 +274,21 @@ button:disabled { cursor:not-allowed; }
   const $ = (selector, root = document) => root.querySelector(selector);
   const params = new URLSearchParams(location.search);
   const idFromUrlOrStorage = (param, key) => params.get(param) || SanaAPI.getId(key);
-  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[ch]);
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[ch]);
   const notice = (message, error = false) => {
-    const el = $('#notice'); if (!el) return;
-    el.textContent = message; el.className = `notice ${error ? 'is-error' : 'is-success'}`;
+    const el = $('#notice');
+    if (el) { el.textContent = message; el.className = 'notice ' + (error ? 'is-error' : 'is-success'); }
   };
   const setBusy = (button, busy, text = 'Обработка…') => {
     if (!button) return;
-    if (busy) { button.dataset.originalText = button.innerHTML; button.disabled = true; button.innerHTML = text; }
+    if (busy) { button.dataset.originalText = button.innerHTML; button.disabled = true; button.textContent = text; }
     else { button.disabled = false; if (button.dataset.originalText) button.innerHTML = button.dataset.originalText; }
   };
-
   const fields = [
+    { key:'title', label:'Название задачи', rows:2 },
+    { key:'topic', label:'Тема', rows:2 },
+    { key:'need', label:'Краткая потребность', rows:2 },
+    { key:'interaction_format', label:'Формат взаимодействия', rows:2 },
     { key:'context', label:'Контекст и потребность', weight:20, rows:4 },
     { key:'data_materials', label:'Данные и материалы', weight:20, rows:3 },
     { key:'expected_result', label:'Ожидаемый результат', weight:15, rows:3 },
@@ -276,222 +298,260 @@ button:disabled { cursor:not-allowed; }
     { key:'business_contact', label:'Связь с бизнесом', weight:10, rows:2 }
   ];
   const fieldByKey = Object.fromEntries(fields.map(field => [field.key, field]));
+  const isConfirmed = value => [true, 1, '1', 'true'].includes(value);
+  const cardUrl = id => 'card.html?card_id=' + encodeURIComponent(id);
   function normalizeQuestions(data) {
-    const source = data?.task || data;
-    const supplied = source?.questions || data?.questions || source?.clarifying_questions || source?.ai_questions || [];
-    const list = (Array.isArray(supplied) ? supplied : []).filter(item => item && (typeof item === 'string' || typeof item === 'object')).map(item => {
-      const text = typeof item === 'string' ? item : item.question || item.text || item.label || '';
-      const possible = typeof item === 'object' ? item.field || item.card_field || item.key : '';
-      const field = fieldByKey[possible] ? possible : '';
-      return typeof text === 'string' && text.trim() ? { field, question:text.trim() } : null;
-    }).filter(Boolean);
-    if (list.length < 3) throw new Error('Backend должен вернуть не менее трёх уточняющих вопросов в GET /api/tasks.php?id=…');
+    const supplied = Array.isArray(data?.questions) ? data.questions : [];
+    const list = supplied.filter(item => item && typeof item === 'object' && fieldByKey[item.field] && fieldByKey[item.field].weight && typeof item.question === 'string' && item.question.trim());
+    if (list.length < 3) throw new Error('Не удалось получить уточняющие вопросы. Обновите страницу и попробуйте ещё раз.');
     return list;
   }
-
-  async function initEntry() {
-    document.addEventListener('click', event => {
-      const button = event.target.closest('[data-role]'); if (!button) return;
-      const role = button.dataset.role;
-      localStorage.setItem('aiSana.role', role);
-      location.href = role === 'business' ? 'business/new-task.html' : 'team/profile.html';
-    });
+  function providerMessage(data) {
+    if (data?.provider === 'local_stub') return 'Вопросы и черновик подготовлены локальным помощником. Проверьте и дополните сведения перед публикацией.';
+    return 'Помощник уточняет детали вашей задачи. Ответы можно отредактировать в карточке.';
   }
 
-  async function initNewTask() {
-    const form = $('#draft-form'); if (!form) return;
+  function initEntry() {
+    document.addEventListener('click', event => {
+      const button = event.target.closest('[data-role]');
+      if (!button) return;
+      SanaAPI.saveId('role', button.dataset.role);
+      location.href = button.dataset.role === 'business' ? 'business/new-task.html' : 'team/profile.html';
+    });
+  }
+  function initNewTask() {
+    const form = $('#draft-form');
+    if (!form) return;
+    const input = $('#raw-description');
+    input.value = SanaAPI.getDraft('description', '');
+    input.addEventListener('input', () => SanaAPI.saveDraft('description', input.value));
     form.addEventListener('submit', async event => {
       event.preventDefault();
       const button = $('button[type="submit"]', form);
       if (button.disabled) return;
-      const description = $('#raw-description').value.trim();
+      const description = input.value.trim();
       if (description.length < 10) { notice('Опишите задачу хотя бы в нескольких словах.', true); return; }
-      setBusy(button, true);
+      setBusy(button, true, 'Сохраняю задачу…');
       try {
         const result = await SanaAPI.createTask(description);
         const taskId = result?.task_id ?? result?.id;
-        if (taskId == null) throw new Error('Сервер создал задачу, но не вернул task_id.');
+        if (!taskId) throw new Error('Сервер не вернул номер задачи.');
         SanaAPI.saveId('taskId', taskId);
-        location.href = `questions.html?task_id=${encodeURIComponent(taskId)}`;
-      } catch (error) { notice(error.message || 'Не удалось отправить задачу.', true); setBusy(button, false); }
+        SanaAPI.clearDraft('description');
+        location.href = 'questions.html?task_id=' + encodeURIComponent(taskId);
+      } catch (error) { notice(error.message, true); setBusy(button, false); }
     });
   }
-
   async function initQuestions() {
-    const form = $('#questions-form'); if (!form) return;
+    const form = $('#questions-form');
+    if (!form) return;
+    const host = $('#questions-list');
+    const button = $('button[type="submit"]', form);
     form.addEventListener('submit', event => event.preventDefault());
-    const submitButton = $('button[type="submit"]', form);
-    submitButton.disabled = true;
+    button.disabled = true;
     const taskId = idFromUrlOrStorage('task_id', 'taskId');
-    if (!taskId) { notice('Не найден черновик. Вернитесь и создайте задачу заново.', true); return; }
+    if (!taskId) { host.innerHTML = ''; notice('Не найден черновик. Создайте новую задачу.', true); return; }
     SanaAPI.saveId('taskId', taskId);
+    const existingCard = SanaAPI.getId('taskCard.' + taskId);
+    if (existingCard) { location.replace(cardUrl(existingCard)); return; }
+    const draftKey = 'questions.' + taskId;
+    let draft = SanaAPI.getDraft(draftKey, {});
     let questionList;
     try {
-      const task = await SanaAPI.getTask(taskId);
-      questionList = normalizeQuestions(task);
-      if (task?.raw_description || task?.task?.raw_description) SanaAPI.saveId('rawDescription', task.raw_description || task.task.raw_description);
+      await SanaAPI.getTask(taskId);
+      const result = draft.questions ? draft : await SanaAPI.getQuestions(taskId);
+      questionList = normalizeQuestions(result);
+      draft = { questions:questionList, provider:result.provider, answers:draft.answers || {} };
+      SanaAPI.saveDraft(draftKey, draft);
+      if ($('#assistant-note')) $('#assistant-note').textContent = providerMessage(result);
     } catch (error) {
-      $('#questions-list').innerHTML = `<div class="api-empty">${escapeHtml(error.message || 'Не удалось загрузить вопросы с сервера.')}</div>`;
-      notice(error.message || 'Не удалось загрузить вопросы с сервера.', true);
-      $('button[type="submit"]', form).disabled = true;
+      host.innerHTML = '<div class="api-empty">' + esc(error.message) + '</div>';
+      notice(error.message, true);
       return;
     }
-    $('#questions-list').innerHTML = questionList.map((item, index) => {
-      const field = fieldByKey[item.field];
-      const destination = field ? `<small>Поле карточки: ${escapeHtml(field.label)}</small>` : `<label>К какому разделу относится ответ?<select data-answer-target required><option value="">Выберите раздел</option>${fields.map(f => `<option value="${f.key}">${escapeHtml(f.label)}</option>`).join('')}</select></label>`;
-      return `<div class="question-row"><span class="question-number">${String(index + 1).padStart(2, '0')}</span><div class="question-content"><label for="answer-${index}"><b>${escapeHtml(item.question)}</b></label>${destination}<textarea id="answer-${index}" data-answer-field="${escapeHtml(item.field)}" rows="2" placeholder="Ваш ответ…"></textarea></div></div>`;
-    }).join('');
-    submitButton.disabled = false;
-
+    host.innerHTML = questionList.map((item, index) => '<div class="question-row"><span class="question-number">' + String(index + 1).padStart(2, '0') + '</span><div class="question-content"><label for="answer-' + index + '"><b>' + esc(item.question) + '</b></label><small>' + esc(fieldByKey[item.field].label) + '</small><textarea id="answer-' + index + '" data-answer-field="' + esc(item.field) + '" rows="2" placeholder="Ваш ответ…">' + esc(draft.answers[item.field] || '') + '</textarea></div></div>').join('');
+    const collectAnswers = () => {
+      const answers = {};
+      form.querySelectorAll('[data-answer-field]').forEach(input => {
+        const value = input.value.trim();
+        if (value) answers[input.dataset.answerField] = value;
+      });
+      draft.answers = answers;
+      SanaAPI.saveDraft(draftKey, draft);
+      return answers;
+    };
+    form.addEventListener('input', collectAnswers);
+    button.disabled = false;
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      const button = $('button[type="submit"]', form);
       if (button.disabled) return;
-      const answersByField = {};
-      form.querySelectorAll('[data-answer-field]').forEach(input => {
-        const field = input.dataset.answerField || input.closest('.question-content').querySelector('[data-answer-target]').value;
-        const value = input.value.trim();
-        if (value && fieldByKey[field]) answersByField[field] = [answersByField[field], value].filter(Boolean).join('\n\n');
-      });
-      setBusy(button, true);
-      let createdCardId = null;
+      const answers = collectAnswers();
+      setBusy(button, true, 'Формирую карточку…');
       try {
-        const created = await SanaAPI.createCard(taskId);
+        const created = await SanaAPI.createCard(taskId, answers);
         const cardId = created?.card_id ?? created?.id;
-        if (cardId == null) throw new Error('Сервер не вернул card_id при создании карточки.');
-        createdCardId = cardId;
+        if (!cardId) throw new Error('Сервер не вернул номер карточки.');
         SanaAPI.saveId('cardId', cardId);
-        // Preserve entered answers if a later PATCH fails or the user reloads the card.
-        sessionStorage.setItem(`aiSana.edits.${cardId}`, JSON.stringify(answersByField));
-        const answers = Object.entries(answersByField).map(([field,value]) => ({field,value}));
-        for (const answer of answers) {
-          await SanaAPI.updateCardField({ card_id:cardId, field:answer.field, value:answer.value, confirmed:false });
-        }
-        sessionStorage.removeItem(`aiSana.edits.${cardId}`);
-        location.href = `card.html?card_id=${encodeURIComponent(cardId)}`;
-      } catch (error) {
-        if (createdCardId != null) {
-          SanaAPI.saveId('cardId', createdCardId);
-          location.href = `card.html?card_id=${encodeURIComponent(createdCardId)}&answers_incomplete=1`;
-          return;
-        }
-        notice(error.message || 'Не удалось сформировать карточку.', true); setBusy(button, false);
-      }
+        SanaAPI.saveId('taskCard.' + taskId, cardId);
+        SanaAPI.saveDraft('provider.' + cardId, { provider:created.provider, fallback_reason:created.fallback_reason });
+        SanaAPI.clearDraft(draftKey);
+        location.href = cardUrl(cardId);
+      } catch (error) { notice(error.message, true); setBusy(button, false); }
     });
   }
 
-  const isConfirmed = value => value === true || value === 1 || value === '1' || value === 'true';
   let currentCard = {};
   let savingField = false;
+  let refreshRequired = false;
   const edits = new Map();
   function fieldValue(card, key) {
     const record = card?.card || card || {};
     const source = record.fields || record;
     const item = source[key];
     if (item && typeof item === 'object') return { value:item.value ?? item.text ?? '', confirmed:isConfirmed(item.confirmed) };
-    return { value:item ?? '', confirmed:isConfirmed(source[`${key}_confirmed`]) };
+    return { value:item ?? record[key] ?? '', confirmed:isConfirmed(source[key + '_confirmed'] ?? record[key + '_confirmed']) };
   }
-
+  function updatePublishState() {
+    const button = $('#publish-button');
+    if (!button) return;
+    const published = isConfirmed(currentCard.published);
+    const check = $('#publish-confirm');
+    button.hidden = false;
+    button.dataset.published = String(published);
+    button.textContent = published ? 'Перейти к предложениям →' : 'Опубликовать задачу →';
+    const hasRequired = Boolean(String(fieldValue(currentCard, 'title').value).trim() && String(fieldValue(currentCard, 'context').value).trim());
+    button.disabled = savingField || refreshRequired || (!published && (!check?.checked || !hasRequired || edits.size > 0));
+    const confirmRow = $('#publish-confirm-row');
+    if (confirmRow) confirmRow.hidden = published;
+    const hint = $('#publish-hint');
+    if (hint) hint.textContent = published ? 'Карточка опубликована и доступна командам.' : edits.size ? 'Сохраните изменённые поля перед публикацией.' : !hasRequired ? 'Добавьте название и контекст задачи.' : 'Проверьте карточку и подтвердите публикацию. Рейтинг отражает полноту подтверждённых сведений.';
+  }
   function renderCard(card) {
     currentCard = card?.card || card || {};
-    const host = $('#card-fields');
-    host.innerHTML = fields.map(field => {
-      const current = fieldValue(card, field.key);
+    $('#card-fields').innerHTML = fields.map(field => {
+      const current = fieldValue(currentCard, field.key);
       if (current.confirmed) edits.delete(field.key);
-      if (!current.confirmed && edits.has(field.key)) current.value = edits.get(field.key);
-      return `<form class="field-card ${current.confirmed ? 'confirmed' : ''}" data-field-form="${field.key}">
-        <div class="field-card-head"><div><span class="field-weight">${field.weight} БАЛЛОВ</span><h2>${field.label}</h2></div><span class="field-state">${current.confirmed ? 'Подтверждено ✓' : 'Не подтверждено'}</span></div>
-        <textarea name="value" rows="${field.rows}" ${current.confirmed ? 'disabled' : ''} placeholder="Добавьте информацию в это поле…">${escapeHtml(current.value)}</textarea>
-        ${current.confirmed ? '<div class="locked-note">Поле подтверждено и защищено от изменений.</div>' : `<div class="confirm-row"><label class="confirm-check"><input type="checkbox" name="confirmed" required><span>Подтверждаю, что информация верна</span></label><button class="btn confirm-btn" type="submit">Подтвердить ✓</button></div>`}
-        <div class="field-error" aria-live="polite"></div>
-      </form>`;
+      if (edits.has(field.key)) current.value = edits.get(field.key);
+      const state = field.weight ? current.confirmed ? 'Подтверждено ✓' : 'Не подтверждено' : 'Описание задачи';
+      const buttons = current.confirmed
+        ? '<div class="confirm-row"><span class="locked-note">Изменение снимет подтверждение и публикацию.</span><button class="btn confirm-btn" type="button" data-unlock="' + field.key + '">Изменить</button></div>'
+        : '<div class="confirm-row">' + (field.weight ? '<label class="confirm-check"><input type="checkbox" name="confirmed"><span>Подтверждаю, что информация верна</span></label>' : '<span class="locked-note">Это поле не влияет на рейтинг.</span>') + '<button class="btn confirm-btn" type="submit">Сохранить</button></div>';
+      return '<form class="field-card ' + (current.confirmed ? 'confirmed' : '') + '" data-field-form="' + field.key + '"><div class="field-card-head"><div><span class="field-weight">' + (field.weight ? field.weight + ' БАЛЛОВ' : 'О ЗАДАЧЕ') + '</span><h2><label for="card-' + field.key + '">' + field.label + '</label></h2></div><span class="field-state">' + state + '</span></div><textarea id="card-' + field.key + '" name="value" rows="' + field.rows + '" ' + (current.confirmed ? 'disabled ' : '') + 'placeholder="Добавьте информацию в это поле…">' + esc(current.value) + '</textarea>' + buttons + '<div class="field-error" aria-live="polite"></div></form>';
     }).join('');
-
-    const record = card?.card || card || {};
-    const rating = Math.max(0, Math.min(100, Number(record.rating ?? record.readiness_score ?? 0)));
-    if (window.SanaRating) SanaRating.render($('#rating-widget'), rating, record.readiness_level);
-    const publish = $('#publish-button');
-    if (publish) {
-      const published = isConfirmed(record.published) || isConfirmed(record.is_published) || record.status === 'published' || record.status === 'опубликовано';
-      publish.hidden = false;
-      publish.disabled = (!Number.isFinite(rating) || rating < 40) && !published;
-      publish.dataset.published = String(published);
-      publish.textContent = published ? 'Перейти к предложениям →' : 'Опубликовать задачу →';
-      $('#publish-hint').textContent = published ? 'Карточка опубликована и доступна командам.' : rating < 40 ? 'Для публикации подтвердите поля и наберите минимум 40 баллов.' : 'Рейтинг достиг 40 баллов — карточку можно опубликовать.';
+    if (window.SanaRating) SanaRating.render($('#rating-widget'), currentCard.rating, currentCard.readiness_level);
+    const criteria = $('#rating-criteria');
+    const breakdown = currentCard.rating_details?.breakdown;
+    if (criteria && Array.isArray(breakdown)) {
+      criteria.innerHTML = '<b>Начисленные баллы</b>' + breakdown.filter(item => fieldByKey[item.field]).map(item => {
+        const reason = item.points > 0 ? 'Подтверждено' : item.filled ? 'Нужно подтвердить' : 'Нужно заполнить';
+        return '<span><span>' + fieldByKey[item.field].label + '</span><i>' + esc(item.points) + ' / ' + esc(item.weight) + '</i><small>' + reason + '</small></span>';
+      }).join('');
     }
+    updatePublishState();
   }
-  function levelFor(score) { return score >= 90 ? 'Приоритетная' : score >= 70 ? 'Готовая' : score >= 40 ? 'Рабочая' : 'Черновик'; }
-
   async function initCard() {
-    const host = $('#card-fields'); if (!host) return;
+    const host = $('#card-fields');
+    if (!host) return;
     const cardId = idFromUrlOrStorage('card_id', 'cardId');
-    if (!cardId) { notice('Не найдена карточка. Сначала ответьте на уточняющие вопросы.', true); host.innerHTML = ''; return; }
+    if (!cardId) { notice('Не найдена карточка. Сначала создайте задачу.', true); host.innerHTML = ''; return; }
     SanaAPI.saveId('cardId', cardId);
-    const editKey = `aiSana.edits.${cardId}`;
-    try { Object.entries(JSON.parse(sessionStorage.getItem(editKey) || '{}')).forEach(([key,value]) => { if (fieldByKey[key]) edits.set(key,value); }); } catch { /* Ignore corrupt local drafts. */ }
-    const persistEdits = () => sessionStorage.setItem(editKey, JSON.stringify(Object.fromEntries(edits)));
+    const editKey = 'aiSana.edits.' + cardId;
+    try { Object.entries(JSON.parse(sessionStorage.getItem(editKey) || '{}')).forEach(([key, value]) => { if (fieldByKey[key] && typeof value === 'string') edits.set(key, value); }); } catch {}
+    const persistEdits = () => { try { sessionStorage.setItem(editKey, JSON.stringify(Object.fromEntries(edits))); } catch {} };
+    const resetConfirmation = () => { if ($('#publish-confirm')) $('#publish-confirm').checked = false; };
     host.addEventListener('input', event => {
       const form = event.target.closest('[data-field-form]');
-      if (form && event.target.matches('textarea')) { edits.set(form.dataset.fieldForm, event.target.value); persistEdits(); }
+      if (form && event.target.matches('textarea')) {
+        const key = form.dataset.fieldForm;
+        if (event.target.value === fieldValue(currentCard, key).value) edits.delete(key);
+        else edits.set(key, event.target.value);
+        persistEdits(); resetConfirmation(); updatePublishState();
+      }
     });
-    const load = async () => { const data = await SanaAPI.getCard(cardId); renderCard(data); persistEdits(); };
+    const load = async () => {
+      const data = await SanaAPI.getCard(cardId);
+      refreshRequired = false;
+      renderCard(data);
+      persistEdits();
+    };
     try {
       await load();
-      if (params.get('answers_incomplete') === '1') notice('Карточка создана, но не все ответы сохранились. Проверьте и заполните поля вручную.', true);
-    } catch (error) { host.innerHTML = ''; notice(error.message || 'Не удалось загрузить карточку.', true); return; }
+      if (SanaAPI.getDraft?.('provider.' + cardId)?.provider === 'local_stub') {
+        notice('Черновик подготовлен локальным помощником. Проверьте сведения и добавьте недостающие детали.');
+      }
+    }
+    catch (error) { host.innerHTML = ''; notice(error.message, true); return; }
 
-    host.addEventListener('submit', async event => {
-      const form = event.target.closest('[data-field-form]'); if (!form) return;
-      event.preventDefault();
+    const save = async (form, field, value, confirmed, button) => {
       if (savingField) return;
+      const errorBox = $('.field-error', form);
+      if (confirmed && !value) { errorBox.textContent = 'Заполните поле перед подтверждением.'; return; }
+      const input = $('textarea', form);
+      const checkbox = $('input[name="confirmed"]', form);
+      setBusy(button, true, 'Сохраняю…');
+      savingField = true;
+      input.disabled = true;
+      if (checkbox) checkbox.disabled = true;
+      errorBox.textContent = '';
+      updatePublishState();
+      try {
+        let updatedCard;
+        if (form.dataset.saved !== 'true') {
+          const payload = { id:cardId, field, value };
+          if (fieldByKey[field].weight) payload.confirmed = confirmed;
+          updatedCard = await SanaAPI.updateCardField(payload);
+          form.dataset.saved = 'true';
+          edits.delete(field);
+          persistEdits();
+          resetConfirmation();
+        }
+        if (updatedCard?.id && updatedCard.rating != null) {
+          refreshRequired = false;
+          renderCard(updatedCard);
+          persistEdits();
+        } else { await load(); }
+        notice('Поле «' + fieldByKey[field].label + '» сохранено. Рейтинг обновлён.');
+      } catch (error) {
+        errorBox.textContent = error.message;
+        notice(error.message, true);
+        setBusy(button, false);
+        if (form.dataset.saved === 'true') {
+          refreshRequired = true;
+          button.textContent = 'Обновить состояние';
+        } else {
+          input.disabled = isConfirmed(fieldValue(currentCard, field).confirmed);
+          if (checkbox) checkbox.disabled = false;
+        }
+      } finally { savingField = false; updatePublishState(); }
+    };
+    host.addEventListener('submit', async event => {
+      const form = event.target.closest('[data-field-form]');
+      if (!form) return;
+      event.preventDefault();
       const field = form.dataset.fieldForm;
       const value = $('textarea[name="value"]', form).value.trim();
       const checkbox = $('input[name="confirmed"]', form);
-      const errorBox = $('.field-error', form);
-      if (!value) { errorBox.textContent = 'Заполните поле перед подтверждением.'; return; }
-      if (!checkbox.checked) { errorBox.textContent = 'Отметьте, что информация верна.'; return; }
-      const button = $('button[type="submit"]', form); setBusy(button, true, 'Сохраняю…'); errorBox.textContent = '';
-      savingField = true;
-      $('textarea', form).disabled = true;
-      try {
-        if (form.dataset.saved !== 'true') await SanaAPI.updateCardField({ card_id:cardId, field, value, confirmed:true });
-        form.dataset.saved = 'true';
-        // Keep other unfinished edits when refreshing the server's rating and confirmations.
-        $('textarea', form).disabled = true;
-        checkbox.disabled = true;
-        await load();
-        notice(`Поле «${fieldByKey[field].label}» подтверждено. Рейтинг обновлён.`);
-      } catch (error) {
-        notice(error.message || 'Не удалось обновить карточку.', true);
-        errorBox.textContent = error.message;
-        setBusy(button, false);
-        if (form.dataset.saved === 'true') {
-          button.textContent = 'Обновить состояние';
-          $('#publish-button').disabled = true;
-        } else { $('textarea', form).disabled = false; }
-      }
-      finally { savingField = false; }
+      await save(form, field, value, Boolean(checkbox?.checked), $('button[type="submit"]', form));
     });
+    host.addEventListener('click', async event => {
+      const button = event.target.closest('[data-unlock]');
+      if (!button) return;
+      const field = button.dataset.unlock;
+      await save(button.closest('[data-field-form]'), field, fieldValue(currentCard, field).value, false, button);
+    });
+    $('#publish-confirm')?.addEventListener('change', updatePublishState);
     $('#publish-button')?.addEventListener('click', async event => {
       const button = event.currentTarget;
-      if (button.dataset.published === 'true') {
-        location.href = `proposals.html?card_id=${encodeURIComponent(cardId)}`;
-        return;
-      }
-      const rating = Number(currentCard.rating ?? currentCard.readiness_score ?? 0);
-      if (!Number.isFinite(rating) || rating < 40 || savingField) return;
-      if (edits.size) { notice('Сначала подтвердите изменённые поля, чтобы опубликовать актуальное описание.', true); return; }
+      if (button.disabled) return;
+      if (button.dataset.published === 'true') { location.href = 'proposals.html?card_id=' + encodeURIComponent(cardId); return; }
+      if (!$('#publish-confirm')?.checked || edits.size || savingField || refreshRequired) return;
       setBusy(button, true, 'Публикую…');
       try {
         await SanaAPI.publishCard(cardId);
-        location.href = `proposals.html?card_id=${encodeURIComponent(cardId)}`;
-      } catch (error) {
-        notice(error.message || 'Не удалось опубликовать карточку.', true);
-        setBusy(button, false);
-      }
+        location.href = 'proposals.html?card_id=' + encodeURIComponent(cardId);
+      } catch (error) { notice(error.message, true); setBusy(button, false); updatePublishState(); }
     });
   }
-
   const path = location.pathname;
   if (path.endsWith('/business/new-task.html')) initNewTask();
   else if (path.endsWith('/business/questions.html')) initQuestions();
@@ -506,51 +566,39 @@ button:disabled { cursor:not-allowed; }
 ```js
 (() => {
   const $ = selector => document.querySelector(selector);
-  const { escape:esc, notice, setBusy } = SanaUI;
-  const host = $('#catalog-list'); if (!host) return;
-  const topicSelect = $('#filter-topic');
-  const levelSelect = $('#filter-level');
-  let current = [];
-  let knownTopics = [];
-  let requestVersion = 0;
-  const cardId = card => card.card_id ?? card.id;
-  const textValue = value => value && typeof value === 'object' ? value.value ?? value.text ?? '' : value;
-  const getTitle = card => card.title || card.name || textValue(card.expected_result) || 'Бизнес-задача';
-  const getTopic = card => card.topic || card.industry || card.category || 'Другое';
-
-  async function loadCatalog() {
-    const version = ++requestVersion;
-    notice($('#notice'), '');
-    host.innerHTML = '<div class="loading">Загружаю каталог…</div>';
-    try {
-      const filters = { topic:topicSelect.value, level:levelSelect.value };
-      const response = await SanaAPI.getCatalog(filters);
-      if (version !== requestVersion) return;
-      current = SanaUI.list(response, ['cards','catalog','items']).slice().sort((a,b) => Number(b.rating ?? b.readiness_score ?? 0) - Number(a.rating ?? a.readiness_score ?? 0));
-      knownTopics = [...new Set([...knownTopics, ...current.map(getTopic)])];
-      const selected = topicSelect.value;
-      topicSelect.innerHTML = '<option value="">Все темы</option>' + knownTopics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join('');
-      if (knownTopics.includes(selected)) topicSelect.value = selected;
-      if (!current.length) { host.innerHTML = '<div class="empty-state">Опубликованных задач пока нет.</div>'; return; }
-      host.innerHTML = current.map((card,index) => {
-        const id = cardId(card);
-        const rating = Number(card.rating ?? card.readiness_score ?? 0);
-        const preview = textValue(card.context ?? card.fields?.context) || textValue(card.expected_result) || 'Откройте карточку, чтобы узнать подробности задачи.';
-        return `<button class="catalog-card" type="button" data-card-id="${esc(id)}"><div class="catalog-card-main"><span class="tag">${esc(getTopic(card))}</span><h2>${esc(getTitle(card))}</h2><p>${esc(preview)}</p><span class="catalog-more">Посмотреть задачу <b>→</b></span></div><div class="catalog-card-rating" id="catalog-rating-${index}"></div></button>`;
-      }).join('');
-      current.forEach((card,index) => SanaRating.render($(`#catalog-rating-${index}`), Number(card.rating ?? card.readiness_score ?? 0), card.readiness_level, true));
-    } catch (error) { if (version !== requestVersion) return; host.innerHTML = ''; notice($('#notice'), error.message || 'Не удалось загрузить каталог.', true); }
+  const { escape:esc, list, notice } = SanaUI;
+  const host = $('#catalog-list');
+  if (!host) return;
+  let requestNumber = 0;
+  function render(cards) {
+    if (!cards.length) {
+      host.innerHTML = '<div class="empty-state">Задачи не найдены. Попробуйте изменить фильтры.</div>';
+      return;
+    }
+    host.innerHTML = cards.map((card, index) => `<a class="catalog-card" href="task-view.html?card_id=${encodeURIComponent(card.id ?? card.card_id)}"><div class="catalog-card-main"><span class="tag">${esc(card.topic || 'Бизнес-задача')}</span><h2>${esc(card.title || `Задача #${card.id}`)}</h2><p>${esc(card.need || card.context || 'Описание пока не добавлено')}</p><span class="catalog-more">Посмотреть задачу <b>→</b></span></div><div class="catalog-card-rating" id="catalog-rating-${index}"></div></a>`).join('');
+    cards.forEach((card, index) => SanaRating.render($(`#catalog-rating-${index}`), card.rating, card.readiness_level, true));
   }
-
-  topicSelect.addEventListener('change', loadCatalog);
-  levelSelect.addEventListener('change', loadCatalog);
-  $('#filter-sort').addEventListener('change', loadCatalog);
-  host.addEventListener('click', event => {
-    const button = event.target.closest('[data-card-id]'); if (!button) return;
-    SanaAPI.saveId('selectedCardId', button.dataset.cardId);
-    location.href = `task-view.html?card_id=${encodeURIComponent(button.dataset.cardId)}`;
-  });
-  loadCatalog();
+  async function load(initial = false) {
+    const ownRequest = ++requestNumber;
+    host.innerHTML = '<div class="loading">Загружаю каталог…</div>';
+    notice($('#notice'), '');
+    try {
+      const cards = list(await SanaAPI.getCatalog({ topic:$('#filter-topic').value, level:$('#filter-level').value, sort:$('#filter-sort').value }), ['cards', 'items']);
+      if (initial) {
+        const topics = [...new Set(cards.map(card => card.topic).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'ru'));
+        $('#filter-topic').innerHTML = '<option value="">Все темы</option>' + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join('');
+      }
+      if (ownRequest !== requestNumber) return;
+      render(cards);
+    } catch (error) {
+      if (ownRequest !== requestNumber) return;
+      host.innerHTML = '<button class="btn" type="button" id="retry-catalog">Загрузить ещё раз</button>';
+      notice($('#notice'), error.message, true);
+      $('#retry-catalog').addEventListener('click', () => load(initial));
+    }
+  }
+  ['#filter-topic', '#filter-level', '#filter-sort'].forEach(selector => $(selector).addEventListener('change', () => load()));
+  load(true);
 })();
 
 ```
@@ -583,60 +631,53 @@ button:disabled { cursor:not-allowed; }
 ```js
 (() => {
   const $ = selector => document.querySelector(selector);
-  const { escape:esc, notice, queryId, setBusy } = SanaUI;
-  const listHost = $('#proposal-list'); if (!listHost) return;
+  const { escape:esc, notice, queryId } = SanaUI;
+  const listHost = $('#proposal-list');
+  if (!listHost) return;
   const cardId = queryId('card_id', 'cardId');
   const chosenHost = $('#chosen-banner');
   if (!cardId) { listHost.innerHTML = ''; notice($('#notice'), 'Не найдена карточка задачи. Вернитесь к публикации.', true); return; }
   SanaAPI.saveId('cardId', cardId);
   let choosing = false;
-
   function render(proposals) {
-    chosenHost.hidden = true;
+    const picked = proposals.filter(proposal => SanaUI.proposalStatus(proposal) === 'Выбрано');
+    chosenHost.hidden = picked.length === 0;
+    chosenHost.textContent = picked.length ? 'Приняты предложения: ' + picked.map(item => item.team_name || 'Команда #' + item.team_id).join(', ') : '';
     if (!proposals.length) { listHost.innerHTML = '<div class="empty-state">Предложений пока нет. Когда команды откликнутся, они появятся здесь.</div>'; return; }
-    chosenHost.hidden = true;
-    const picked = proposals.find(p => SanaUI.proposalStatus(p) === 'Выбрано');
     listHost.innerHTML = proposals.map(proposal => {
       const id = proposal.proposal_id ?? proposal.id;
-      const team = proposal.team_name || proposal.name || `Команда #${proposal.team_id ?? ''}`;
-      const selected = SanaUI.proposalStatus(proposal) === 'Выбрано';
-      const rejected = SanaUI.proposalStatus(proposal) === 'Не выбрано';
-      proposal = { ...proposal, prototype_link:SanaUI.safeUrl(proposal.prototype_link) };
-      const status = selected ? 'Команда выбрана' : rejected ? 'Не выбрано' : 'На рассмотрении';
-      return `<article class="proposal-card"><div class="proposal-top"><div class="team-avatar">${esc(team.slice(0,1).toUpperCase())}</div><div class="proposal-team"><h3>${esc(team)}</h3><span>Предложение команды</span></div><span class="proposal-status ${selected?'chosen':''}">${status}</span></div><div class="proposal-content"><div><b>Идея решения</b><p>${esc(proposal.solution_idea || '')}</p></div><div><b>План работы</b><p>${esc(proposal.plan || '')}</p></div><div class="proposal-meta"><span>Срок: ${esc(proposal.deadline || 'не указан')}</span>${proposal.prototype_link ? `<a href="${esc(proposal.prototype_link)}" target="_blank" rel="noreferrer">Открыть прототип ↗</a>` : '<span>Прототип не приложен</span>'}</div></div>${selected ? `<div class="selected-result">Команда выбрана: <b>${esc(team)}</b></div>` : rejected || picked ? '' : `<div class="proposal-actions"><button class="btn primary" type="button" data-choose-id="${esc(id)}" data-team-name="${esc(team)}">Выбрать эту команду</button></div>`}</article>`;
+      const team = proposal.team_name || 'Команда #' + proposal.team_id;
+      const status = SanaUI.proposalStatus(proposal);
+      const prototype = SanaUI.safeUrl(proposal.prototype_link);
+      const profileFields = [['Интересы',proposal.team_interests],['Навыки',proposal.team_skills],['Технологии',proposal.team_technologies]].filter(([, value]) => value);
+      const profile = profileFields.length ? '<details class="team-profile"><summary>Профиль команды</summary><div class="proposal-content">' + profileFields.map(([label,value]) => '<div><b>' + label + '</b><p>' + esc(value) + '</p></div>').join('') + '</div></details>' : '';
+      const button = (decision, label, primary = false) => '<button class="btn ' + (primary ? 'primary' : 'confirm-btn') + '" type="button" data-proposal-id="' + esc(id) + '" data-decision="' + decision + '">' + label + '</button>';
+      const actions = (status !== 'Выбрано' ? button('accepted', 'Принять предложение', true) : '') + (status !== 'Не выбрано' ? button('rejected', 'Отклонить') : '') + (status !== 'На рассмотрении' ? button('pending', 'Отменить решение') : '');
+      return '<article class="proposal-card"><div class="proposal-top"><div class="team-avatar">' + esc(team.slice(0,1).toUpperCase()) + '</div><div class="proposal-team"><h3>' + esc(team) + '</h3><span>Предложение команды</span></div><span class="proposal-status ' + (status === 'Выбрано' ? 'chosen' : '') + '">' + status + '</span></div><div class="proposal-content"><div><b>Идея решения</b><p>' + esc(proposal.solution_idea) + '</p></div><div><b>План работы</b><p>' + esc(proposal.plan) + '</p></div><div class="proposal-meta"><span>Срок: ' + esc(proposal.deadline || 'не указан') + '</span>' + (prototype ? '<a href="' + esc(prototype) + '" target="_blank" rel="noopener noreferrer">Открыть прототип ↗</a>' : '<span>Прототип не приложен</span>') + '</div></div>' + profile + '<div class="proposal-actions">' + actions + '</div></article>';
     }).join('');
-    if (picked) {
-      const team = picked.team_name || picked.name || `Команда #${picked.team_id ?? ''}`;
-      chosenHost.hidden = false; chosenHost.textContent = `Команда выбрана: ${team}`;
-    }
   }
-
   async function load() {
-    listHost.innerHTML = '<div class="loading">Загружаю предложения…</div>';
-    try {
-      const [cardResult, proposalResult] = await Promise.all([SanaAPI.getCard(cardId), SanaAPI.getProposalsForCard(cardId)]);
-      const card = cardResult?.card || cardResult?.data || cardResult || {};
-      $('#proposal-task-title').textContent = card.title || card.name || 'Отклики к карточке задачи';
-      render(SanaUI.list(proposalResult, ['proposals','items']));
-    } catch (error) { listHost.innerHTML = ''; notice($('#notice'), error.message || 'Не удалось загрузить предложения.', true); }
+    const [cardResult, proposalResult] = await Promise.all([SanaAPI.getCard(cardId), SanaAPI.getProposalsForCard(cardId)]);
+    const card = cardResult?.card || cardResult;
+    $('#proposal-task-title').textContent = card.title || 'Отклики к карточке задачи';
+    render(SanaUI.list(proposalResult, ['proposals','items']));
   }
-
   listHost.addEventListener('click', async event => {
-    const button = event.target.closest('[data-choose-id]'); if (!button) return;
-    if (choosing) return;
-    if (!window.confirm(`Выбрать команду «${button.dataset.teamName}»?`)) return;
-    setBusy(button, true, 'Выбираю…');
+    const button = event.target.closest('[data-decision]');
+    if (!button || choosing) return;
     choosing = true;
+    listHost.querySelectorAll('button').forEach(item => { item.disabled = true; });
     try {
-      await SanaAPI.chooseProposal(button.dataset.chooseId);
-      chosenHost.hidden = false;
-      chosenHost.textContent = `Команда выбрана: ${button.dataset.teamName}`;
-      notice($('#notice'), 'Ваш выбор сохранён. Команда назначена вручную.');
+      await SanaAPI.chooseProposal(button.dataset.proposalId, button.dataset.decision);
+      notice($('#notice'), 'Решение сохранено.');
       await load();
-    } catch (error) { notice($('#notice'), error.message || 'Не удалось выбрать команду.', true); setBusy(button, false); }
-    finally { choosing = false; }
+    } catch (error) { notice($('#notice'), error.message + ' Обновите страницу, чтобы проверить статус.', true); }
+    finally {
+      choosing = false;
+      listHost.querySelectorAll('button').forEach(item => { item.disabled = false; });
+    }
   });
-  load();
+  load().catch(error => { listHost.innerHTML = ''; notice($('#notice'), error.message, true); });
 })();
 
 ```
@@ -649,7 +690,7 @@ button:disabled { cursor:not-allowed; }
     if (score >= 90) return { key:'priority', label:'Приоритет' };
     if (score >= 70) return { key:'ready', label:'Готово' };
     if (score >= 40) return { key:'work', label:'В работе' };
-    return { key:'project', label:'Проект' };
+    return { key:'project', label:'Черновик' };
   };
   window.SanaRating = {
     level:normalize,
@@ -674,91 +715,141 @@ button:disabled { cursor:not-allowed; }
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const { escape:esc, notice, queryId, setBusy } = SanaUI;
+  const teamFields = ['name', 'interests', 'skills', 'technologies'];
+  const valuesFrom = form => Object.fromEntries(Array.from(new FormData(form), ([key,value]) => [key, String(value).trim()]));
 
   async function initProfile() {
-    const form = $('#team-form'); if (!form) return;
+    const form = $('#team-form');
+    if (!form) return;
+    const select = $('#existing-team');
+    const use = $('#use-team');
+    const button = $('button[type="submit"]', form);
+    let teams = [];
+    let activeTeamId = null;
+    let loading = true;
+    button.disabled = true;
+    const fill = team => {
+      activeTeamId = team?.id ?? null;
+      teamFields.forEach(name => { $('[name="' + name + '"]', form).value = team?.[name] || ''; });
+      select.value = activeTeamId == null ? '' : String(activeTeamId);
+      use.disabled = activeTeamId == null;
+      button.textContent = activeTeamId == null ? 'Создать и открыть каталог →' : 'Сохранить изменения →';
+    };
+    select.addEventListener('change', () => fill(teams.find(team => String(team.id) === select.value)));
+    use.addEventListener('click', () => {
+      if (activeTeamId == null) return;
+      const team = teams.find(item => String(item.id) === String(activeTeamId));
+      SanaAPI.saveId('teamId', activeTeamId);
+      SanaAPI.saveId('teamName', team.name);
+      location.href = 'catalog.html';
+    });
+    $('#new-team').addEventListener('click', () => { fill(null); $('[name="name"]', form).focus(); });
+    try {
+      teams = SanaUI.list(await SanaAPI.getTeams(), ['teams', 'items']);
+      select.innerHTML = '<option value="">Новая команда</option>' + teams.map(team => '<option value="' + esc(team.id) + '">' + esc(team.name) + '</option>').join('');
+      fill(teams.find(team => String(team.id) === SanaAPI.getId('teamId')));
+    } catch (error) {
+      notice($('#notice'), error.message, true);
+      select.disabled = true;
+    } finally { loading = false; button.disabled = false; }
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      const button = $('button[type="submit"]', form);
-      if (button.disabled) return;
-      const payload = Object.fromEntries(Array.from(new FormData(form), ([key,value]) => [key,value.trim()]));
+      if (button.disabled || loading) return;
+      const payload = valuesFrom(form);
       if (!payload.name) { notice($('#notice'), 'Введите название команды.', true); return; }
       setBusy(button, true, 'Сохраняю…');
+      use.disabled = true; select.disabled = true; $('#new-team').disabled = true;
       try {
-        const result = await SanaAPI.createTeam(payload);
-        const teamId = result?.team_id ?? result?.id;
-        if (teamId == null) throw new Error('Сервер не вернул team_id.');
+        const result = activeTeamId == null ? await SanaAPI.createTeam(payload) : await SanaAPI.updateTeam(activeTeamId, payload);
+        const teamId = result?.team_id ?? result?.id ?? activeTeamId;
+        if (teamId == null) throw new Error('Сервер не вернул номер команды.');
         SanaAPI.saveId('teamId', teamId);
         SanaAPI.saveId('teamName', payload.name);
         location.href = 'catalog.html';
-      } catch (error) { notice($('#notice'), error.message || 'Не удалось сохранить профиль.', true); setBusy(button, false); }
+      } catch (error) {
+        notice($('#notice'), error.message, true);
+        setBusy(button, false);
+        use.disabled = activeTeamId == null; select.disabled = false; $('#new-team').disabled = false;
+      }
     });
   }
 
-  function normalizeCard(data) { return data?.card || data?.data?.card || data?.data || data || {}; }
   function getField(card, key) {
-    const source = card.fields || card;
-    const raw = source[key];
+    const raw = (card.fields || card)[key] ?? card[key];
     return raw && typeof raw === 'object' ? raw.value || raw.text || '' : raw || '';
   }
   async function initTaskView() {
-    const host = $('#task-details'); if (!host) return;
+    const host = $('#task-details');
+    if (!host) return;
     const form = $('#proposal-form');
+    const button = $('button[type="submit"]', form);
     form.addEventListener('submit', event => event.preventDefault());
-    const submitButton = $('button[type="submit"]', form);
-    submitButton.disabled = true;
+    button.disabled = true;
     const cardId = queryId('card_id', 'selectedCardId');
     if (!cardId) { host.innerHTML = ''; notice($('#notice'), 'Не найдена задача. Откройте её из каталога.', true); return; }
     SanaAPI.saveId('selectedCardId', cardId);
+    const teamId = SanaAPI.getId('teamId');
+    const draftKey = 'proposal.' + cardId + '.' + (teamId || 'new');
+    const draft = SanaAPI.getDraft(draftKey, {});
+    ['solution_idea', 'plan', 'prototype_link', 'deadline'].forEach(name => { $('[name="' + name + '"]', form).value = draft[name] || ''; });
+    form.addEventListener('input', () => SanaAPI.saveDraft(draftKey, valuesFrom(form)));
+    let card;
     try {
-      const response = await SanaAPI.getCard(cardId);
-      const card = normalizeCard(response);
-      const rating = Number(card.rating ?? card.readiness_score ?? 0);
-      const topic = card.topic || card.industry || card.category || 'Бизнес-задача';
-      const title = card.title || card.name || 'Бизнес-задача';
+      const result = await SanaAPI.getCard(cardId);
+      card = result?.card || result;
       const sections = [
-        ['Контекст и потребность','context'],['Данные и материалы','data_materials'],['Ожидаемый результат','expected_result'],
-        ['Критерии успеха','success_criteria'],['Ограничения','constraints'],['Пользователи','users'],['Связь с бизнесом','business_contact']
-      ].map(([label,key]) => `<section class="detail-section"><h3>${label}</h3><p>${esc(getField(card,key) || 'Информация не указана')}</p></section>`).join('');
-      host.innerHTML = `<span class="tag">${esc(topic)}</span><h1>${esc(title)}</h1><div id="task-rating"></div>${sections}`;
-      SanaRating.render($('#task-rating'), rating, card.readiness_level, true);
-    } catch (error) { host.innerHTML = ''; notice($('#notice'), error.message || 'Не удалось загрузить задачу.', true); $('#proposal-form button[type="submit"]').disabled = true; return; }
-
-    submitButton.disabled = false;
+        ['Потребность', 'need'], ['Формат взаимодействия', 'interaction_format'],
+        ['Контекст и потребность','context'], ['Данные и материалы','data_materials'], ['Ожидаемый результат','expected_result'],
+        ['Критерии успеха','success_criteria'], ['Ограничения','constraints'], ['Пользователи','users'], ['Связь с бизнесом','business_contact']
+      ].map(([label,key]) => '<section class="detail-section"><h3>' + label + '</h3><p>' + esc(getField(card,key) || 'Информация не указана') + '</p></section>').join('');
+      host.innerHTML = '<span class="tag">' + esc(card.topic || 'Бизнес-задача') + '</span><h1>' + esc(card.title || 'Бизнес-задача') + '</h1><div id="task-rating"></div>' + sections;
+      SanaRating.render($('#task-rating'), card.rating, card.readiness_level, true);
+    } catch (error) { host.innerHTML = ''; notice($('#notice'), error.message, true); return; }
+    if (![true, 1, '1'].includes(card.published)) {
+      notice($('#notice'), 'Задача снята с публикации. Новые предложения пока не принимаются.', true);
+      return;
+    }
+    if (!teamId) {
+      notice($('#notice'), 'Создайте или выберите профиль команды перед отправкой предложения.', true);
+      const link = document.createElement('a');
+      link.className = 'btn';
+      link.href = 'profile.html';
+      link.textContent = 'Открыть профиль команды';
+      form.appendChild(link);
+      return;
+    }
+    button.disabled = false;
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      const teamId = SanaAPI.getId('teamId');
-      if (!teamId) { notice($('#notice'), 'Сначала заполните профиль команды.', true); return; }
-      const button = $('button[type="submit"]', form);
       if (button.disabled) return;
-      const values = Object.fromEntries(Array.from(new FormData(form), ([key,value]) => [key,value.trim()]));
+      const values = valuesFrom(form);
       if (!values.solution_idea || !values.plan || !values.deadline) { notice($('#notice'), 'Заполните идею, план и срок.', true); return; }
       if (values.prototype_link && !SanaUI.safeUrl(values.prototype_link)) { notice($('#notice'), 'Укажите ссылку на прототип, начинающуюся с https:// или http://.', true); return; }
       setBusy(button, true, 'Отправляю…');
-      const payload = { card_id:cardId, team_id:teamId, ...values };
       try {
-        await SanaAPI.createProposal(payload);
+        await SanaAPI.createProposal({ card_id:cardId, team_id:teamId, ...values });
+        SanaAPI.clearDraft(draftKey);
         location.href = 'my-proposals.html';
-      } catch (error) { notice($('#notice'), error.message || 'Не удалось отправить предложение.', true); setBusy(button, false); }
+      } catch (error) { notice($('#notice'), error.message, true); setBusy(button, false); }
     });
   }
 
   async function initMyProposals() {
-    const host = $('#my-proposals-list'); if (!host) return;
+    const host = $('#my-proposals-list');
+    if (!host) return;
     const teamId = SanaAPI.getId('teamId');
-    if (!teamId) { host.innerHTML = ''; notice($('#notice'), 'Профиль команды не найден. Создайте профиль, чтобы видеть отклики.', true); return; }
+    if (!teamId) { host.innerHTML = '<div class="empty-state">Выберите <a href="profile.html">профиль команды</a>, чтобы видеть её предложения.</div>'; return; }
     try {
-      const response = await SanaAPI.getProposalsForTeam(teamId);
-      const proposals = SanaUI.list(response, ['proposals','items']);
-      if (!proposals.length) { host.innerHTML = '<div class="empty-state">Предложений пока нет. Откройте каталог и выберите задачу.</div>'; return; }
+      const proposals = SanaUI.list(await SanaAPI.getProposalsForTeam(teamId), ['proposals','items']);
+      if (!proposals.length) { host.innerHTML = '<div class="empty-state">Предложений пока нет. <a href="catalog.html">Откройте каталог</a> и выберите задачу.</div>'; return; }
       host.innerHTML = proposals.map(proposal => {
         const status = SanaUI.proposalStatus(proposal);
-        const title = proposal.card_title || proposal.task_title || proposal.title || `Задача #${proposal.card_id ?? ''}`;
-        return `<article class="proposal-card"><div class="proposal-top"><div class="team-avatar">↗</div><div class="proposal-team"><h3>${esc(title)}</h3><span>${esc(proposal.created_at || 'Предложение команды')}</span></div><span class="proposal-status ${status==='Выбрано'?'chosen':''}">${status}</span></div><div class="proposal-content"><div><b>Идея решения</b><p>${esc(proposal.solution_idea || '')}</p></div><div><b>План</b><p>${esc(proposal.plan || '')}</p></div></div></article>`;
+        const title = proposal.card_title || 'Задача #' + proposal.card_id;
+        const prototype = SanaUI.safeUrl(proposal.prototype_link);
+        return '<article class="proposal-card"><div class="proposal-top"><div class="team-avatar">↗</div><div class="proposal-team"><h3><a href="task-view.html?card_id=' + encodeURIComponent(proposal.card_id) + '">' + esc(title) + '</a></h3><span>' + esc(proposal.created_at || 'Предложение команды') + '</span></div><span class="proposal-status ' + (status === 'Выбрано' ? 'chosen' : '') + '">' + status + '</span></div><div class="proposal-content"><div><b>Идея решения</b><p>' + esc(proposal.solution_idea) + '</p></div><div><b>План</b><p>' + esc(proposal.plan) + '</p></div><div class="proposal-meta"><span>Срок: ' + esc(proposal.deadline) + '</span>' + (prototype ? '<a href="' + esc(prototype) + '" target="_blank" rel="noopener noreferrer">Открыть прототип ↗</a>' : '') + '</div></div></article>';
       }).join('');
-    } catch (error) { host.innerHTML = ''; notice($('#notice'), error.message || 'Не удалось загрузить предложения.', true); }
+    } catch (error) { host.innerHTML = ''; notice($('#notice'), error.message, true); }
   }
-
   const path = location.pathname;
   if (path.endsWith('/team/profile.html')) initProfile();
   else if (path.endsWith('/team/task-view.html')) initTaskView();
@@ -791,7 +882,8 @@ button:disabled { cursor:not-allowed; }
   const proposalStatus = proposal => {
     const value = String(proposal.status ?? proposal.selection_status ?? '').trim().toLowerCase();
     if (['rejected','not_selected','not selected','declined','не выбрано','не выбрана','отклонено','отклонена'].includes(value)) return 'Не выбрано';
-    if (['selected','chosen','accepted','выбрано','выбрана','команда выбрана'].includes(value) || [true,1,'1'].includes(proposal.selected)) return 'Выбрано';
+    if (['pending','на рассмотрении'].includes(value)) return 'На рассмотрении';
+    if (['selected','chosen','accepted','выбрано','выбрана','команда выбрана'].includes(value) || [true,1,'1'].includes(proposal.selected ?? proposal.chosen)) return 'Выбрано';
     return 'На рассмотрении';
   };
   const safeUrl = value => {
@@ -807,7 +899,7 @@ button:disabled { cursor:not-allowed; }
 
 ```html
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Каталог задач — AI Sana</title><link rel="stylesheet" href="../css/style.css"></head>
-<body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">КОМАНДА</div><a class="navitem" href="profile.html">◎ &nbsp; Профиль команды</a><a class="navitem active" href="catalog.html">⌕ &nbsp; Каталог задач</a><a class="navitem" href="my-proposals.html">↗ &nbsp; Мои предложения</a></aside><main class="content"><header class="topbar"><div>Пространство команды <span>/</span> Каталог задач</div><span class="top-pill">ОБЩИЙ КАТАЛОГ</span></header><section class="page"><div class="eyebrow">ОТКРЫТЫЙ ПУЛ ПРОЕКТОВ</div><h1>Выберите задачу</h1><p class="intro">Все опубликованные задачи доступны каждой команде. Рейтинг показывает готовность описания к работе.</p><div class="catalog-filters"><label>Тема<select id="filter-topic"><option value="">Все темы</option></select></label><label>Уровень готовности<select id="filter-level"><option value="">Любой уровень</option><option value="project">Проект</option><option value="in_work">В работе</option><option value="ready">Готово</option><option value="priority">Приоритет</option></select></label><label>Сортировка<select id="filter-sort"><option value="rating">Рейтинг: сначала высокий</option></select></label></div><div id="catalog-list" class="catalog-list"><div class="loading">Загружаю каталог…</div></div><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana · Открытый выбор команды</footer></main></div><script src="../js/api.js"></script><script src="../js/ratings.js"></script><script src="../js/ui.js"></script><script src="../js/catalog.js"></script><script src="../js/navigation.js"></script></body></html>
+<body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">КОМАНДА</div><a class="navitem" href="profile.html">◎ &nbsp; Профиль команды</a><a class="navitem active" href="catalog.html">⌕ &nbsp; Каталог задач</a><a class="navitem" href="my-proposals.html">↗ &nbsp; Мои предложения</a></aside><main class="content"><header class="topbar"><div>Пространство команды <span>/</span> Каталог задач</div><span class="top-pill">ОБЩИЙ КАТАЛОГ</span></header><section class="page"><div class="eyebrow">ОТКРЫТЫЙ ПУЛ ПРОЕКТОВ</div><h1>Выберите задачу</h1><p class="intro">Все опубликованные задачи доступны каждой команде. Рейтинг показывает готовность описания к работе.</p><div class="catalog-filters"><label>Тема<select id="filter-topic"><option value="">Все темы</option></select></label><label>Уровень готовности<select id="filter-level"><option value="">Любой уровень</option><option value="проект">Черновик</option><option value="в работе">В работе</option><option value="готово">Готово</option><option value="приоритет">Приоритет</option></select></label><label>Сортировка<select id="filter-sort"><option value="rating">Рейтинг: сначала высокий</option></select></label></div><div id="catalog-list" class="catalog-list"><div class="loading">Загружаю каталог…</div></div><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana · Открытый выбор команды</footer></main></div><script src="../js/api.js"></script><script src="../js/ratings.js"></script><script src="../js/ui.js"></script><script src="../js/catalog.js"></script><script src="../js/navigation.js"></script></body></html>
 
 ```
 
@@ -823,7 +915,7 @@ button:disabled { cursor:not-allowed; }
 
 ```html
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Профиль команды — AI Sana</title><link rel="stylesheet" href="../css/style.css"></head>
-<body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">КОМАНДА</div><a class="navitem active" href="profile.html">◎ &nbsp; Профиль команды</a><a class="navitem" href="catalog.html">⌕ &nbsp; Каталог задач</a><a class="navitem" href="my-proposals.html">↗ &nbsp; Мои предложения</a></aside><main class="content"><header class="topbar"><div>Пространство команды <span>/</span> Профиль</div><span class="top-pill">КОМАНДА</span></header><section class="page narrow"><div class="step-line"><span>ПРОФИЛЬ КОМАНДЫ</span></div><div class="eyebrow">НАЙДИТЕ СВОЮ ЗАДАЧУ</div><h1>Расскажите о команде</h1><p class="intro">Профиль поможет бизнесу понять ваш опыт. Команда сама выбирает задачи и отправляет предложения.</p><form id="team-form" class="panel"><label class="form-row"><span class="field-label">Название команды</span><input name="name" required placeholder="Например, Qadam Studio"></label><label class="form-row"><span class="field-label">Интересы</span><textarea name="interests" rows="2" placeholder="Темы и сферы, которые вам интересны"></textarea></label><label class="form-row"><span class="field-label">Навыки</span><textarea name="skills" rows="2" placeholder="Исследования, аналитика, дизайн…"></textarea></label><label class="form-row"><span class="field-label">Технологии</span><input name="technologies" placeholder="Python, Figma, React…"></label><div class="panel-actions"><span>После сохранения откроется общий каталог задач</span><button class="btn primary" type="submit">Сохранить и открыть каталог →</button></div></form><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana · Команда выбирает сама</footer></main></div><script src="../js/api.js"></script><script src="../js/ui.js"></script><script src="../js/team.js"></script><script src="../js/navigation.js"></script></body></html>
+<body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">КОМАНДА</div><a class="navitem active" href="profile.html">◎ &nbsp; Профиль команды</a><a class="navitem" href="catalog.html">⌕ &nbsp; Каталог задач</a><a class="navitem" href="my-proposals.html">↗ &nbsp; Мои предложения</a></aside><main class="content"><header class="topbar"><div>Пространство команды <span>/</span> Профиль</div><span class="top-pill">КОМАНДА</span></header><section class="page narrow"><div class="step-line"><span>ПРОФИЛЬ КОМАНДЫ</span></div><div class="eyebrow">НАЙДИТЕ СВОЮ ЗАДАЧУ</div><h1>Расскажите о команде</h1><p class="intro">Профиль поможет бизнесу понять ваш опыт. Команда сама выбирает задачи и отправляет предложения.</p><section class="panel existing-team-panel"><label class="form-row" for="existing-team"><span class="field-label">Выбрать сохранённую команду</span><select id="existing-team"><option value="">Загружаю команды…</option></select></label><div class="panel-actions"><button class="btn confirm-btn" id="new-team" type="button">Новая команда</button><button class="btn primary" id="use-team" type="button" disabled>Открыть каталог с этим профилем →</button></div></section><form id="team-form" class="panel"><label class="form-row"><span class="field-label">Название команды</span><input name="name" required placeholder="Например, Qadam Studio"></label><label class="form-row"><span class="field-label">Интересы</span><textarea name="interests" rows="2" placeholder="Темы и сферы, которые вам интересны"></textarea></label><label class="form-row"><span class="field-label">Навыки</span><textarea name="skills" rows="2" placeholder="Исследования, аналитика, дизайн…"></textarea></label><label class="form-row"><span class="field-label">Технологии</span><input name="technologies" placeholder="Python, Figma, React…"></label><div class="panel-actions"><span>После сохранения откроется общий каталог задач</span><button class="btn primary" type="submit">Сохранить и открыть каталог →</button></div></form><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana · Команда выбирает сама</footer></main></div><script src="../js/api.js"></script><script src="../js/ui.js"></script><script src="../js/team.js"></script><script src="../js/navigation.js"></script></body></html>
 
 ```
 

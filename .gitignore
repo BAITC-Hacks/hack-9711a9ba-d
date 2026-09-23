@@ -1,2 +1,8 @@
 /database.sqlite
 /database.sqlite-*
+/.env
+/.tools/
+/node_modules/
+/test-results/
+*.log
+__pycache__/

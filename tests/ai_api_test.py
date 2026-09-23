@@ -16,7 +16,7 @@ import urllib.request
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--php", default="php")
+    parser.add_argument("--php", default=os.environ.get("PHP_BINARY", "php"))
     args = parser.parse_args()
     php = shutil.which(args.php) or args.php
     command = [php]
@@ -37,7 +37,7 @@ def main():
 
     with tempfile.TemporaryDirectory(prefix="ai-sana-api-") as directory:
         root = Path(directory)
-        for name in ["ai_helper.php", "db.php", "rating.php", "schema.sql", "seed.php"]:
+        for name in ["ai_helper.php", "config.php", "db.php", "rating.php", "schema.sql", "seed.php"]:
             shutil.copy2(source / name, root / name)
         shutil.copytree(source / "api", root / "api")
         shutil.copytree(source / "data", root / "data")
@@ -85,6 +85,7 @@ def main():
                 task_id = task["task_id"]
                 status, questions = request("POST", "cards.php", {"action": "questions", "task_id": task_id})
                 check(status == 200 and len(questions["questions"]) >= 3, "questions for saved draft")
+                check(questions["provider"] == "local_stub" and questions["fallback_reason"] == "not_configured", "honest question provider")
                 check(all(set(q) == {"field", "question"} for q in questions["questions"]), "question shape")
                 with closing(sqlite3.connect(root / "database.sqlite")) as db:
                     check(db.execute("SELECT COUNT(*) FROM cards").fetchone()[0] == count_before, "questions do not insert a card")
@@ -92,6 +93,8 @@ def main():
                 answers = {"users": "Управляющий магазина.", "business_contact": "Отдел продаж."}
                 status, created = request("POST", "cards.php", {"action": "build", "task_id": task_id, "answers": answers})
                 check(status == 201 and "card_id" in created, "build and save")
+                check(created["provider"] == "local_stub" and created["fallback_reason"] == "not_configured", "honest build provider")
+                check(created["card"]["id"] == created["card_id"], "build returns complete card")
                 status, card = request("GET", f"cards.php?id={created['card_id']}")
                 check(status == 200 and card["context"] == raw and card["users"] == answers["users"], "saved values verbatim")
                 check(card["data_materials"] == "" and card["constraints"] == "", "no invented facts")
@@ -124,6 +127,18 @@ def main():
                 check(status == 201, "legacy manual POST remains compatible")
                 status, _ = request("POST", "cards.php", {"action": "build", "task_id": task_id, "answers": {}})
                 check(status == 201, "empty answer object accepted")
+                status, result = request("POST", "cards.php", {"action": "build", "task_id": task_id,
+                    "answers": {"title": "Прогноз спроса", "topic": "Ритейл", "users": "Оператор."}})
+                check(status == 201 and result["card"]["title"] == "Прогноз спроса" and result["card"]["topic"] == "Ритейл", "metadata preserved during AI build")
+                status, unsafe = request("POST", "tasks.php", {"raw_description": "Контакт: person@example.com"})
+                check(status == 201, "manual draft can be saved for correction")
+                for method, path, data in [
+                    ("POST", "cards.php", {"action": "questions", "task_id": unsafe["task_id"]}),
+                    ("POST", "questions.php", {"task_id": unsafe["task_id"]}),
+                    ("POST", "generate.php", {"task_id": unsafe["task_id"]}),
+                ]:
+                    status, error = request(method, path, data)
+                    check(status == 422 and "person@example.com" not in json.dumps(error), "consistent AI safety across routes")
             finally:
                 process.terminate()
                 process.wait(timeout=5)

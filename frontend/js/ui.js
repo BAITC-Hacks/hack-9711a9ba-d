@@ -19,7 +19,8 @@
   const proposalStatus = proposal => {
     const value = String(proposal.status ?? proposal.selection_status ?? '').trim().toLowerCase();
     if (['rejected','not_selected','not selected','declined','не выбрано','не выбрана','отклонено','отклонена'].includes(value)) return 'Не выбрано';
-    if (['selected','chosen','accepted','выбрано','выбрана','команда выбрана'].includes(value) || [true,1,'1'].includes(proposal.selected)) return 'Выбрано';
+    if (['pending','на рассмотрении'].includes(value)) return 'На рассмотрении';
+    if (['selected','chosen','accepted','выбрано','выбрана','команда выбрана'].includes(value) || [true,1,'1'].includes(proposal.selected ?? proposal.chosen)) return 'Выбрано';
     return 'На рассмотрении';
   };
   const safeUrl = value => {

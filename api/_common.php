@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 ini_set('display_errors', '0');
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
 require_once __DIR__ . '/../rating.php';
 
 function respond($data, int $status = 200): void
@@ -25,6 +22,7 @@ class ApiError extends RuntimeException {}
 const CARD_FIELDS = ['context', 'data_materials', 'expected_result',
     'success_criteria', 'constraints', 'users', 'business_contact'];
 const CARD_METADATA = ['title', 'topic', 'need', 'interaction_format'];
+const API_TEXT_LIMIT = 12000;
 
 function fail(string $message, int $status = 400): void
 {
@@ -33,6 +31,10 @@ function fail(string $message, int $status = 400): void
 
 function body(): array
 {
+    $contentType = strtolower(trim(explode(';', $_SERVER['CONTENT_TYPE'] ?? '', 2)[0]));
+    if ($contentType !== 'application/json') {
+        fail('Требуется Content-Type: application/json', 415);
+    }
     try {
         $value = json_decode(file_get_contents('php://input'), false, 512, JSON_THROW_ON_ERROR);
     } catch (JsonException $e) {
@@ -66,6 +68,10 @@ function textField(array $data, string $name, bool $required = false): string
     $value = array_key_exists($name, $data) ? $data[$name] : '';
     if (!is_string($value) || ($required && preg_match('/\S/u', $value) !== 1)) {
         fail('Поле ' . $name . ' должно содержать ' . ($required ? 'непустую строку' : 'строку'));
+    }
+    if (strlen($value) > API_TEXT_LIMIT || preg_match('//u', $value) !== 1
+        || preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', $value)) {
+        fail('Поле ' . $name . ' должно содержать текст UTF-8 до 12000 байт без управляющих символов');
     }
     return trim($value);
 }

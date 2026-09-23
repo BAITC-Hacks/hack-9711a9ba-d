@@ -108,3 +108,11 @@
 .detail-section p,.proposal-content p { white-space:pre-wrap; overflow-wrap:anywhere; }
 .api-empty { padding:18px; color:#a55246; }
 button:disabled { cursor:not-allowed; }
+/* Integrated form controls */
+.publish-confirm{margin-top:14px;align-items:flex-start;font-size:9px;line-height:1.5}
+.publish-confirm[hidden]{display:none}.publish-confirm input{flex:none;margin-top:2px}
+.proposal-actions{gap:8px;flex-wrap:wrap}.catalog-card{text-decoration:none;color:inherit}
+.existing-team-panel{margin-bottom:18px}.form-row select{width:100%;border:1px solid #e2e7e0;border-radius:6px;background:#fcfdfa;padding:10px 11px;font:10px var(--sans);color:#28352c}
+.proposal-team a{color:inherit;text-decoration:none}.proposal-team a:hover{text-decoration:underline}
+.rating-criteria>span{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;line-height:1.4}.rating-criteria>span>small{grid-column:1/-1;font-size:7px;color:#939c94}.rating-criteria i{float:none;white-space:nowrap}
+.team-profile{border-top:1px solid #eef0ec;margin-bottom:10px}.team-profile summary{padding:10px 0;cursor:pointer;font-size:9px;color:#55765a}

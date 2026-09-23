@@ -1,4 +1,3 @@
-
 (() => {
   const sidebar = document.querySelector('.sidebar');
   if (!sidebar) return;
@@ -16,5 +15,3 @@
     sidebar.insertBefore(link, sidebar.querySelector('.sidebar-note'));
   }
 })();
-
-```

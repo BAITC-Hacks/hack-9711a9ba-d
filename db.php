@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__ . '/config.php';
 
 try {
     $pdo = new PDO('sqlite:' . __DIR__ . '/database.sqlite');

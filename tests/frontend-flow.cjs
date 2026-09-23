@@ -12,17 +12,18 @@ const temp = fs.mkdtempSync(path.join(os.tmpdir(),'sana-browser-'));
 const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
 
 (async () => {
-  for (const name of ['api','lib','data','prompts','frontend','index.html','db.php','rating.php','ai_helper.php','schema.sql','seed.php']) {
+  for (const name of ['api','lib','data','prompts','frontend','index.html','router.php','config.php','db.php','rating.php','ai_helper.php','schema.sql','seed.php']) {
     fs.cpSync(path.join(root,name),path.join(temp,name),{recursive:true});
   }
   const env = {...process.env, AI_API_KEY:''};
+  fs.writeFileSync(path.join(temp,'.env'), 'AI_API_KEY=test-fixture-not-a-real-key\n');
   const seed = spawnSync(php,['seed.php'],{cwd:temp,env,encoding:'utf8',windowsHide:true});
   assert.equal(seed.status,0,seed.stderr);
   const port = await new Promise(resolve => {
     const probe = net.createServer(); probe.listen(0,'127.0.0.1',() => {const p=probe.address().port;probe.close(()=>resolve(p));});
   });
   const base = 'http://127.0.0.1:'+port;
-  const server = spawn(php,['-S','127.0.0.1:'+port,'-t',temp],{cwd:temp,env,windowsHide:true,stdio:'ignore'});
+  const server = spawn(php,['-S','127.0.0.1:'+port,'-t',temp,path.join(temp,'router.php')],{cwd:temp,env,windowsHide:true,stdio:'ignore'});
   let browser;
   try {
     for (let n=0;n<50;n++) {try {if ((await fetch(base+'/api/teams.php')).ok) break;} catch {} await pause(100);}
@@ -32,6 +33,9 @@ const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
     const errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     page.on('response',response=>{if(response.status()>=400) errors.push(response.status()+' '+response.url());});
+    for (const resource of ['database.sqlite','.env','config.php','seed.php','api/_common.php','schema.sql','data/cards_seed.json']) {
+      assert.equal((await fetch(base+'/'+resource)).status,404,resource+' must not be public');
+    }
     await page.goto(base);
     await page.locator('[data-role="business"]').click();
     await page.locator('#raw-description').fill('Нужен прогноз продаж кафе, хотим уменьшить списания выпечки.');
@@ -57,11 +61,21 @@ const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
     };
     await save('title','Прогноз продаж — браузерный сценарий');
     await save('topic','HoReCa');
+    // A low score must not prevent explicit publication.
+    assert.equal((await (await fetch(base+'/api/cards.php?id='+cardId)).json()).rating,0);
+    assert.equal(await page.locator('#publish-button').isDisabled(),true);
+    await page.locator('#publish-confirm').check();
+    assert.equal(await page.locator('#publish-button').isEnabled(),true);
+    await page.locator('#publish-button').click();
+    await page.waitForURL('**/proposals.html?*');
+    assert.equal(Number((await (await fetch(base+'/api/cards.php?id='+cardId)).json()).published),1);
+    await page.goto(base+'/frontend/business/card.html?card_id='+cardId);
     await save('context','Кафе хочет уменьшить списания выпечки.',true);
     await page.waitForFunction(()=>document.querySelector('[role="progressbar"]').getAttribute('aria-valuenow')==='20');
     assert.equal(await page.locator('#publish-button').isDisabled(),true);
     await save('data_materials','CSV продаж кафе за шесть месяцев.',true);
     await page.waitForFunction(()=>document.querySelector('[role="progressbar"]').getAttribute('aria-valuenow')==='40');
+    await page.locator('#publish-confirm').check();
     await page.locator('#publish-button').click();
     await page.waitForURL('**/proposals.html?*');
     const published = await (await fetch(base+'/api/cards.php?id='+cardId)).json();
@@ -82,23 +96,34 @@ const pause = ms => new Promise(resolve => setTimeout(resolve,ms));
     await page.waitForURL('**/my-proposals.html');
     await page.getByText('На рассмотрении',{exact:true}).waitFor();
     const own = await page.evaluate(()=>localStorage.getItem('aiSana.teamId'));
+    const otherTeamResponse = await fetch(base+'/api/teams.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:'Second browser team'})});
+    assert.equal(otherTeamResponse.status,201);
+    const otherTeam = (await otherTeamResponse.json()).team_id;
     const extra = await fetch(base+'/api/proposals.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      card_id:cardId,team_id:own,solution_idea:'Второе предложение',plan:'Другой план',prototype_link:'',deadline:'2027-01-16'
+      card_id:cardId,team_id:otherTeam,solution_idea:'Второе предложение',plan:'Другой план',prototype_link:'',deadline:'2027-01-16'
     })});
     assert.equal(extra.status,201);
     await page.goto(base+'/frontend/business/proposals.html?card_id='+cardId);
     await page.locator('[data-decision="accepted"]').first().click();
     await page.locator('.proposal-status.chosen').waitFor();
-    await page.locator('[data-decision="accepted"]').click();
+    await page.locator('.proposal-card').filter({has:page.locator('[data-decision="accepted"]:not(:disabled)')}).last().locator('[data-decision="accepted"]').click();
     await page.waitForFunction(()=>document.querySelectorAll('.proposal-status.chosen').length===2);
     await page.locator('[data-decision="rejected"]').first().click();
     await page.waitForFunction(()=>document.querySelectorAll('.proposal-status.chosen').length===1);
     await page.goto(base+'/frontend/team/my-proposals.html');
     await page.getByText('Не выбрано',{exact:true}).waitFor();
+    assert.equal(await page.getByText('Выбрано',{exact:true}).count(),0);
+    await page.goto(base+'/frontend/team/profile.html');
+    await page.locator('#existing-team').selectOption(String(otherTeam));
+    await page.locator('#use-team').click();
+    await page.waitForURL('**/catalog.html');
+    await page.goto(base+'/frontend/team/my-proposals.html');
     await page.getByText('Выбрано',{exact:true}).waitFor();
+    assert.equal(await page.getByText('Не выбрано',{exact:true}).count(),0);
     console.log('PASS: team → filtered catalog → proposal → multiple manual choices → rejection → team statuses');
     await page.goto(base+'/frontend/team/profile.html');
     await page.locator('#use-team:not(:disabled)').waitFor();
+    await page.locator('#existing-team').selectOption(String(own));
     await page.locator('#use-team').click();
     await page.waitForURL('**/catalog.html');
     assert.equal((await (await fetch(base+'/api/teams.php')).json()).filter(t=>t.name==='Browser team').length,1);

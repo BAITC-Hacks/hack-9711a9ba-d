@@ -2,9 +2,9 @@
 declare(strict_types=1);
 require_once __DIR__ . '/_common.php';
 require_once __DIR__ . '/../rating.php';
-require_once __DIR__ . '/../ai_helper.php';
 
 api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
+    require_once __DIR__ . '/../ai_helper.php';
     if ($method === 'GET') {
         respond(cardResponse(findRow($db, 'cards', positiveId($_GET['id'] ?? null))));
         return;
@@ -12,6 +12,7 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
     $data = body();
     $editable = array_merge(CARD_FIELDS, CARD_METADATA);
     if ($method === 'POST') {
+        $provider = [];
         // AI preparation happens before the short SQLite write transaction.
         // The source description always comes from the saved task.
         if (array_key_exists('action', $data)) {
@@ -25,16 +26,15 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
             $task = findRow($db, 'tasks', $taskId);
             try {
                 if ($action === 'questions') {
-                    respond(['task_id' => $taskId,
-                        'questions' => generateQuestions($task['raw_description'])]);
+                    $questions = generateQuestions($task['raw_description'], $provider);
+                    respond($provider + ['task_id' => $taskId, 'questions' => $questions]);
                     return;
                 }
                 if (!isset($data['answers']) || !$data['answers'] instanceof stdClass) {
                     fail('answers должен быть JSON-объектом с ответами по полям');
                 }
-                $cardJson = buildCardFromAnswers($task['raw_description'], (array) $data['answers']);
-                // buildCardFromAnswers validates both AI and fallback before returning.
-                $data = ['task_id' => $taskId] + json_decode($cardJson, true, 32, JSON_THROW_ON_ERROR);
+                $draft = buildAssistantDraft($task['raw_description'], (array) $data['answers'], $provider);
+                $data = ['task_id' => $taskId] + $draft;
             } catch (InvalidArgumentException $e) {
                 fail($e->getMessage(), 422);
             }
@@ -52,7 +52,8 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
             $db->prepare("INSERT INTO cards (task_id, $columns) VALUES ($marks)")->execute($values);
             return (int) $db->lastInsertId();
         });
-        respond(['card_id' => $id], 201);
+        respond($provider + ['card_id' => $id,
+            'card' => cardResponse(findRow($db, 'cards', $id))], 201);
         return;
     }
     onlyKeys($data, ['id', 'field', 'value', 'confirmed']);

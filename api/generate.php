@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/_common.php';
-require_once __DIR__ . '/../ai_helper.php';
 
 api(['POST'], function (PDO $db): void {
+    require_once __DIR__ . '/../ai_helper.php';
     $data = body();
     onlyKeys($data, ['task_id', 'answers']);
     $taskId = positiveId($data['task_id'] ?? null, 'task_id');
@@ -18,23 +18,25 @@ api(['POST'], function (PDO $db): void {
     }
     $task = findRow($db, 'tasks', $taskId);
     try {
-        $result = localAssistant($task['raw_description'], $answers);
+        $draft = buildAssistantDraft($task['raw_description'], $answers, $provider);
+    } catch (InvalidArgumentException $e) {
+        fail($e->getMessage(), 422);
     } catch (UnexpectedValueException $e) {
         error_log((string) $e);
         fail('Помощник вернул некорректный ответ. Карточка не сохранена.', 502);
     }
-    $card = transaction($db, function () use ($db, $taskId, $result): array {
+    $card = transaction($db, function () use ($db, $taskId, $draft): array {
         findRow($db, 'tasks', $taskId);
         $fields = draftFields();
         $columns = implode(', ', $fields);
         $values = [$taskId];
         foreach ($fields as $field) {
-            $values[] = $result['card'][$field];
+            $values[] = $draft[$field];
         }
         $marks = implode(', ', array_fill(0, count($values), '?'));
         $db->prepare("INSERT INTO cards (task_id, $columns) VALUES ($marks)")->execute($values);
         return findRow($db, 'cards', (int) $db->lastInsertId());
     });
-    respond(['provider' => 'local_stub', 'card_id' => (int) $card['id'],
-        'card' => cardResponse($card), 'questions' => $result['questions']], 201);
+    respond($provider + ['card_id' => (int) $card['id'],
+        'card' => cardResponse($card), 'questions' => clarificationQuestions($card)], 201);
 });

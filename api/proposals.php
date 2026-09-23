@@ -4,10 +4,25 @@ require_once __DIR__ . '/_common.php';
 
 api(['GET', 'POST'], function (PDO $db, string $method): void {
     if ($method === 'GET') {
-        $cardId = positiveId($_GET['card_id'] ?? null, 'card_id');
-        findRow($db, 'cards', $cardId);
-        $stmt = $db->prepare('SELECT * FROM proposals WHERE card_id = ? ORDER BY id');
-        $stmt->execute([$cardId]);
+        onlyKeys($_GET, ['card_id', 'team_id']);
+        $where = [];
+        $params = [];
+        foreach (['card_id' => 'cards', 'team_id' => 'teams'] as $field => $table) {
+            if (array_key_exists($field, $_GET)) {
+                $id = positiveId($_GET[$field], $field);
+                findRow($db, $table, $id);
+                $where[] = "p.$field = ?";
+                $params[] = $id;
+            }
+        }
+        if (!$where) {
+            fail('Необходимо передать card_id или team_id');
+        }
+        $stmt = $db->prepare('SELECT p.*, t.name AS team_name, t.interests AS team_interests,
+            t.skills AS team_skills, t.technologies AS team_technologies, c.title AS card_title
+            FROM proposals p JOIN teams t ON t.id = p.team_id JOIN cards c ON c.id = p.card_id
+            WHERE ' . implode(' AND ', $where) . ' ORDER BY p.id');
+        $stmt->execute($params);
         respond($stmt->fetchAll());
         return;
     }

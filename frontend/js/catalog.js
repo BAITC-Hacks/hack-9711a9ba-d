@@ -1,3 +1,36 @@
-html
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Каталог задач — AI Sana</title><link rel="stylesheet" href="../css/style.css"></head>
-<body><div class="app-shell"><aside class="sidebar"><a class="brand" href="../index.html"><span class="brandmark">s</span><span>ai sana<small>ПРОЕКТЫ, КОТОРЫЕ МЕНЯЮТ</small></span></a><div class="side-label">КОМАНДА</div><a class="navitem" href="profile.html">◎ &nbsp; Профиль команды</a><a class="navitem active" href="catalog.html">⌕ &nbsp; Каталог задач</a><a class="navitem" href="my-proposals.html">↗ &nbsp; Мои предложения</a></aside><main class="content"><header class="topbar"><div>Пространство команды <span>/</span> Каталог задач</div><span class="top-pill">ОБЩИЙ КАТАЛОГ</span></header><section class="page"><div class="eyebrow">ОТКРЫТЫЙ ПУЛ ПРОЕКТОВ</div><h1>Выберите задачу</h1><p class="intro">Все опубликованные задачи доступны каждой команде. Рейтинг показывает готовность описания к работе.</p><div class="catalog-filters"><label>Тема<select id="filter-topic"><option value="">Все темы</option></select></label><label>Уровень готовности<select id="filter-level"><option value="">Любой уровень</option><option value="project">Проект</option><option value="in_work">В работе</option><option value="ready">Готово</option><option value="priority">Приоритет</option></select></label><label>Сортировка<select id="filter-sort"><option value="rating">Рейтинг: сначала высокий</option></select></label></div><div id="catalog-list" class="catalog-list"><div class="loading">Загружаю каталог…</div></div><div id="notice" class="notice" role="status" aria-live="polite"></div></section><footer>AI Sana · Открытый выбор команды</footer></main></div><script src="../js/api.js"></script><script src="../js/ratings.js"></script><script src="../js/ui.js"></script><script src="../js/catalog.js"></script><script src="../js/navigation.js"></script></body></html>
+(() => {
+  const $ = selector => document.querySelector(selector);
+  const { escape:esc, list, notice } = SanaUI;
+  const host = $('#catalog-list');
+  if (!host) return;
+  let requestNumber = 0;
+  function render(cards) {
+    if (!cards.length) {
+      host.innerHTML = '<div class="empty-state">Задачи не найдены. Попробуйте изменить фильтры.</div>';
+      return;
+    }
+    host.innerHTML = cards.map((card, index) => `<a class="catalog-card" href="task-view.html?card_id=${encodeURIComponent(card.id ?? card.card_id)}"><div class="catalog-card-main"><span class="tag">${esc(card.topic || 'Бизнес-задача')}</span><h2>${esc(card.title || `Задача #${card.id}`)}</h2><p>${esc(card.need || card.context || 'Описание пока не добавлено')}</p><span class="catalog-more">Посмотреть задачу <b>→</b></span></div><div class="catalog-card-rating" id="catalog-rating-${index}"></div></a>`).join('');
+    cards.forEach((card, index) => SanaRating.render($(`#catalog-rating-${index}`), card.rating, card.readiness_level, true));
+  }
+  async function load(initial = false) {
+    const ownRequest = ++requestNumber;
+    host.innerHTML = '<div class="loading">Загружаю каталог…</div>';
+    notice($('#notice'), '');
+    try {
+      const cards = list(await SanaAPI.getCatalog({ topic:$('#filter-topic').value, level:$('#filter-level').value, sort:$('#filter-sort').value }), ['cards', 'items']);
+      if (initial) {
+        const topics = [...new Set(cards.map(card => card.topic).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'ru'));
+        $('#filter-topic').innerHTML = '<option value="">Все темы</option>' + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join('');
+      }
+      if (ownRequest !== requestNumber) return;
+      render(cards);
+    } catch (error) {
+      if (ownRequest !== requestNumber) return;
+      host.innerHTML = '<button class="btn" type="button" id="retry-catalog">Загрузить ещё раз</button>';
+      notice($('#notice'), error.message, true);
+      $('#retry-catalog').addEventListener('click', () => load(initial));
+    }
+  }
+  ['#filter-topic', '#filter-level', '#filter-sort'].forEach(selector => $(selector).addEventListener('change', () => load()));
+  load(true);
+})();

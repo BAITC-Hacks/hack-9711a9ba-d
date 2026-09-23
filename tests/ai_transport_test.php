@@ -42,7 +42,8 @@ $raw = 'Нужен прогноз продаж.';
 $answers = ['users' => 'Управляющий магазина.'];
 $card = aiSourceCard($raw, $answers);
 $transport['body'] = responseBody($card);
-check(buildCardFromAnswers($raw, $answers) === aiJson($card), 'valid API card accepted');
+check(buildCardFromAnswers($raw, $answers, $provider) === aiJson($card), 'valid API card accepted');
+check($provider === ['provider' => 'openai'], 'successful build provider reported');
 check($transport['calls'] === 1, 'API branch was called');
 $payload = json_decode($transport['options'][CURLOPT_POSTFIELDS], true);
 check($transport['url'] === 'https://api.openai.com/v1/responses', 'fixed HTTPS destination');
@@ -55,7 +56,17 @@ check($transport['options'][CURLOPT_SSL_VERIFYPEER] && $transport['options'][CUR
 $questions = aiLocalQuestions($raw);
 $questions[0]['question'] = 'В каком процессе продаж сейчас возникают ошибки и как часто это происходит?';
 $transport['body'] = responseBody(['questions' => $questions]);
-check(generateQuestions($raw) === $questions, 'valid API questions used, not local templates');
+check(generateQuestions($raw, $provider) === $questions, 'valid API questions used, not local templates');
+check($provider === ['provider' => 'openai'], 'successful questions provider reported');
+// Legacy and canonical routes use the same helper, including card review priorities.
+$complete = array_fill_keys(AI_CARD_FIELDS, 'Filled');
+foreach (AI_CARD_FIELDS as $field) { $complete[$field . '_confirmed'] = 1; }
+$requested = array_column(clarificationQuestions($complete), 'field');
+$reviewQuestions = aiLocalQuestions($raw, $requested);
+$transport['body'] = responseBody(['questions' => $reviewQuestions]);
+$review = assistantQuestions($raw, $complete, $provider);
+check(count($review) === 3 && array_column($review, 'reason') === ['review', 'review', 'review'], 'confirmed card has three review questions');
+check($provider === ['provider' => 'openai'] && array_column($review, 'field') === $requested, 'legacy review uses model and required fields');
 foreach (['broken', responseBody(['context' => 'invented']),
     responseBody(array_replace($card, ['constraints' => 'Бюджет 9000 тенге.'])),
     responseBody(array_replace($card, ['users' => 'Рекомендуем команду Alpha.'])),
@@ -64,7 +75,8 @@ foreach (['broken', responseBody(['context' => 'invented']),
     aiJson(['status' => 'completed', 'output' => [['type' => 'message', 'content' => [['type' => 'refusal', 'refusal' => 'No']]]]]),
     str_repeat('x', 262145)] as $bad) {
     $transport['body'] = $bad;
-    check(buildCardFromAnswers($raw, $answers) === aiJson($card), 'invalid API card falls back');
+    check(buildCardFromAnswers($raw, $answers, $provider) === aiJson($card), 'invalid API card falls back');
+    check($provider['provider'] === 'local_stub', 'rejected output reported as fallback');
     check(generateQuestions($raw) === aiLocalQuestions($raw), 'invalid API questions fall back');
 }
 foreach ([401, 429, 500] as $status) {
@@ -74,7 +86,8 @@ foreach ([401, 429, 500] as $status) {
 }
 $transport['status'] = 200;
 $transport['fail'] = true;
-check(buildCardFromAnswers($raw, $answers) === aiJson($card), 'network failure/timeout fallback');
+check(buildCardFromAnswers($raw, $answers, $provider) === aiJson($card), 'network failure/timeout fallback');
+check($provider['fallback_reason'] === 'provider_unavailable', 'network error reason reported');
 $calls = $transport['calls'];
 try { generateQuestions('Контакт: person@example.com'); } catch (InvalidArgumentException $e) {}
 check($transport['calls'] === $calls, 'unsafe input never sent to provider');
@@ -83,5 +96,6 @@ try {
 } catch (InvalidArgumentException $e) {}
 check($transport['calls'] === $calls, 'cross-field selection blocked before HTTP');
 putenv('AI_API_KEY=');
-check(buildCardFromAnswers($raw, $answers) === aiJson($card) && $transport['calls'] === $calls, 'missing key skips HTTP');
+check(buildCardFromAnswers($raw, $answers, $provider) === aiJson($card) && $transport['calls'] === $calls, 'missing key skips HTTP');
+check($provider === ['provider' => 'local_stub', 'fallback_reason' => 'not_configured'], 'missing key reason reported');
 echo 'OK: ' . $checks . " transport checks\n";

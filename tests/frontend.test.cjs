@@ -42,7 +42,7 @@ test('API rejects HTML errors and unsuccessful JSON even with HTTP 200', async (
 });
 
 test('API sends exact confirmation payload and unwraps server data', async () => {
-  const payload = {card_id:7,field:'context',value:'Описание задачи',confirmed:true};
+  const payload = {id:7,field:'context',value:'Описание задачи',confirmed:true};
   const api = script('api.js', { fetch:async (url, options) => {
     assert.equal(url, '/api/cards.php');
     assert.equal(options.method, 'PATCH');
@@ -72,6 +72,35 @@ test('API timeout cancels a stalled request without retrying a mutation', async 
   } }).SanaAPI;
   await assert.rejects(api.publishCard(1), /не ответил вовремя/);
   assert.equal(calls,1);
+});
+
+test('AI requests, publication and independent decisions follow the PHP contract', async () => {
+  const sent = [];
+  const api = script('api.js', { fetch:async (url, options) => {
+    sent.push({url, method:options.method, body:JSON.parse(options.body)});
+    return new Response(JSON.stringify({ok:true}));
+  } }).SanaAPI;
+  await api.getQuestions(4);
+  await api.createCard(4, {context:'Описание'});
+  await api.publishCard(8);
+  await api.chooseProposal(2, 'rejected');
+  assert.deepEqual(sent, [
+    {url:'/api/cards.php', method:'POST', body:{action:'questions',task_id:4}},
+    {url:'/api/cards.php', method:'POST', body:{action:'build',task_id:4,answers:{context:'Описание'}}},
+    {url:'/api/publish.php', method:'PATCH', body:{card_id:8,published:true,confirmed:true}},
+    {url:'/api/choose.php', method:'PATCH', body:{proposal_id:2,decision:'rejected'}}
+  ]);
+});
+
+test('every browser script is valid JavaScript and HTML has no merge or Markdown fragments', () => {
+  for (const file of fs.readdirSync(path.join(root,'js'))) {
+    if (file.endsWith('.js')) new vm.Script(fs.readFileSync(path.join(root,'js',file),'utf8'), {filename:file});
+  }
+  for (const file of fs.readdirSync(root,{recursive:true}).filter(name => name.endsWith('.html'))) {
+    const html = fs.readFileSync(path.join(root,file),'utf8');
+    assert.doesNotMatch(html, /```|<<<<<<<|>>>>>>>|\?{3}/, file);
+    assert.match(html, /^<!doctype html>/i, file);
+  }
 });
 
 test('card keeps other edits and retries a failed refresh without repeating successful PATCH', async () => {

@@ -1,10 +1,9 @@
-
 (() => {
   const normalize = (level, score) => {
     if (score >= 90) return { key:'priority', label:'Приоритет' };
     if (score >= 70) return { key:'ready', label:'Готово' };
     if (score >= 40) return { key:'work', label:'В работе' };
-    return { key:'project', label:'Проект' };
+    return { key:'project', label:'Черновик' };
   };
   window.SanaRating = {
     level:normalize,
