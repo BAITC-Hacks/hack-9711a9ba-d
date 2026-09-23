@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Data Owls",
+    "interests": "Ритейл, прогнозирование",
+    "skills": "Анализ данных, временные ряды",
+    "technologies": "Python, pandas, scikit-learn"
+  },
+  {
+    "id": 2,
+    "name": "NLP Nomads",
+    "interests": "Образование, чат-боты",
+    "skills": "NLP, поиск по документам",
+    "technologies": "Python, FastAPI, SQLite"
+  },
+  {
+    "id": 3,
+    "name": "Supply Minds",
+    "interests": "Логистика, склад",
+    "skills": "Прогнозирование, визуализация",
+    "technologies": "Python, SQL, JavaScript"
+  },
+  {
+    "id": 4,
+    "name": "Learn Lab",
+    "interests": "EdTech, рекомендации",
+    "skills": "Рекомендательные системы, UX",
+    "technologies": "PHP, SQLite, Python"
+  },
+  {
+    "id": 5,
+    "name": "Web Sparks",
+    "interests": "Малый бизнес, автоматизация",
+    "skills": "Backend, frontend, API",
+    "technologies": "PHP, JavaScript, SQLite"
+  }
+]
