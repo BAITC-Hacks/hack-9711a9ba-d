@@ -10,10 +10,6 @@ CREATE TABLE IF NOT EXISTS tasks (
 CREATE TABLE IF NOT EXISTS cards (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     task_id INTEGER NOT NULL REFERENCES tasks(id),
-    title TEXT NOT NULL DEFAULT '',
-    topic TEXT NOT NULL DEFAULT '',
-    need TEXT NOT NULL DEFAULT '',
-    interaction_format TEXT NOT NULL DEFAULT '',
     context TEXT NOT NULL DEFAULT '',
     data_materials TEXT NOT NULL DEFAULT '',
     expected_result TEXT NOT NULL DEFAULT '',
@@ -57,7 +53,5 @@ CREATE TABLE IF NOT EXISTS proposals (
     plan TEXT NOT NULL DEFAULT '',
     prototype_link TEXT NOT NULL DEFAULT '',
     deadline TEXT NOT NULL DEFAULT '',
-    chosen INTEGER NOT NULL DEFAULT 0 CHECK (chosen IN (0, 1)),
-    status TEXT NOT NULL DEFAULT 'pending'
-        CHECK (status IN ('pending', 'accepted', 'rejected'))
+    chosen INTEGER NOT NULL DEFAULT 0 CHECK (chosen IN (0, 1))
 );

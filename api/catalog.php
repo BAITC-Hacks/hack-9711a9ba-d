@@ -23,13 +23,13 @@ api(['GET'], function (PDO $db): void {
         $params[] = $level;
     }
     if ($topic !== '') {
-        $fields = ['context', 'data_materials', 'expected_result', 'success_criteria', 'constraints', 'users'];
+        $fields = ['title', 'topic', 'need', 'context', 'data_materials', 'expected_result', 'success_criteria', 'constraints', 'users'];
         $sql .= ' AND (' . implode(' OR ', array_map(function ($field) {
             return "contains_topic($field, ?) = 1";
         }, $fields)) . ')';
         $params = array_merge($params, array_fill(0, count($fields), $topic));
     }
-    $sql .= $sort === 'rating' ? ' ORDER BY rating DESC, id ASC' : ' ORDER BY id ASC';
+    $sql .= ' ORDER BY rating DESC, id ASC';
     $stmt = $db->prepare($sql);
     $stmt->execute($params);
     respond($stmt->fetchAll());

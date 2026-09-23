@@ -6,11 +6,13 @@ require_once __DIR__ . '/../ai_helper.php';
 
 api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
     if ($method === 'GET') {
-        respond(findRow($db, 'cards', positiveId($_GET['id'] ?? null)));
+        respond(cardResponse(findRow($db, 'cards', positiveId($_GET['id'] ?? null))));
         return;
     }
     $data = body();
+    $editable = array_merge(CARD_FIELDS, CARD_METADATA);
     if ($method === 'POST') {
+<<<<<<< HEAD
         // AI preparation happens before the short SQLite write transaction.
         // The source description always comes from the saved task.
         if (array_key_exists('action', $data)) {
@@ -39,37 +41,57 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
             }
         }
         onlyKeys($data, array_merge(['task_id'], CARD_FIELDS));
+=======
+        onlyKeys($data, array_merge(['task_id'], $editable));
+>>>>>>> 25ac8e155d5d284ffc5d83eac333bc3c72bfe9c9
         $taskId = positiveId($data['task_id'] ?? null, 'task_id');
         $values = [$taskId];
-        foreach (CARD_FIELDS as $field) {
+        foreach ($editable as $field) {
             $values[] = textField($data, $field);
         }
-        $id = transaction($db, function () use ($db, $taskId, $values): int {
+        $id = transaction($db, function () use ($db, $taskId, $values, $editable): int {
             findRow($db, 'tasks', $taskId);
-            $columns = implode(', ', CARD_FIELDS);
-            $db->prepare("INSERT INTO cards (task_id, $columns) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-                ->execute($values);
+            $columns = implode(', ', $editable);
+            $marks = implode(', ', array_fill(0, count($values), '?'));
+            $db->prepare("INSERT INTO cards (task_id, $columns) VALUES ($marks)")->execute($values);
             return (int) $db->lastInsertId();
         });
         respond(['card_id' => $id], 201);
         return;
     }
-    onlyKeys($data, ['id', 'field', 'value']);
+    onlyKeys($data, ['id', 'field', 'value', 'confirmed']);
     $id = positiveId($data['id'] ?? $_GET['id'] ?? null);
     $field = $data['field'] ?? null;
-    if (!in_array($field, CARD_FIELDS, true)) {
-        fail('field должен быть одним из семи текстовых полей карточки');
+    if (!in_array($field, $editable, true)) {
+        fail('Недопустимое поле карточки');
     }
-    $value = textField($data, 'value', true);
-    $card = transaction($db, function () use ($db, $id, $field, $value): array {
+    $scored = in_array($field, CARD_FIELDS, true);
+    if (!$scored && array_key_exists('confirmed', $data)) {
+        fail('У этого поля нет отдельного флага подтверждения');
+    }
+    $confirmed = $scored ? flag(array_key_exists('confirmed', $data) ? $data['confirmed'] : 1, 'confirmed') : 0;
+    if (!array_key_exists('value', $data)) {
+        fail('Необходимо передать value');
+    }
+    $value = textField($data, 'value', $scored && $confirmed === 1);
+    $card = transaction($db, function () use ($db, $id, $field, $value, $scored, $confirmed): array {
         $card = findRow($db, 'cards', $id);
+        $changed = $card[$field] !== $value || ($scored && (int) $card[$field . '_confirmed'] !== $confirmed);
         $card[$field] = $value;
-        $card[$field . '_confirmed'] = 1;
+        if ($scored) {
+            $card[$field . '_confirmed'] = $confirmed;
+        }
         $rating = calculateRating($card);
-        $db->prepare("UPDATE cards SET $field = ?, {$field}_confirmed = 1,
-            rating = ?, readiness_level = ? WHERE id = ?")
-            ->execute([$value, $rating['rating'], $rating['level'], $id]);
+        $set = "$field = ?, rating = ?, readiness_level = ?, published = ?";
+        $params = [$value, $rating['rating'], $rating['level'], $changed ? 0 : $card['published']];
+        if ($scored) {
+            $set .= ", {$field}_confirmed = ?";
+            $params[] = $confirmed;
+        }
+        $params[] = $id;
+        $db->prepare("UPDATE cards SET $set WHERE id = ?")->execute($params);
+        syncTaskStatus($db, (int) $card['task_id']);
         return findRow($db, 'cards', $id);
     });
-    respond($card);
+    respond(cardResponse($card));
 });

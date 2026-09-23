@@ -6,6 +6,7 @@ header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+require_once __DIR__ . '/../rating.php';
 
 function respond($data, int $status = 200): void
 {
@@ -23,6 +24,7 @@ class ApiError extends RuntimeException {}
 
 const CARD_FIELDS = ['context', 'data_materials', 'expected_result',
     'success_criteria', 'constraints', 'users', 'business_contact'];
+const CARD_METADATA = ['title', 'topic', 'need', 'interaction_format'];
 
 function fail(string $message, int $status = 400): void
 {
@@ -61,11 +63,32 @@ function positiveId($value, string $name = 'id'): int
 
 function textField(array $data, string $name, bool $required = false): string
 {
-    $value = $data[$name] ?? '';
-    if (!is_string($value) || ($required && trim($value) === '')) {
+    $value = array_key_exists($name, $data) ? $data[$name] : '';
+    if (!is_string($value) || ($required && preg_match('/\S/u', $value) !== 1)) {
         fail('Поле ' . $name . ' должно содержать ' . ($required ? 'непустую строку' : 'строку'));
     }
     return trim($value);
+}
+
+function flag($value, string $name): int
+{
+    if (!in_array($value, [0, 1, false, true], true)) {
+        fail('Поле ' . $name . ' должно быть 0, 1, false или true');
+    }
+    return (int) $value;
+}
+
+function cardResponse(array $card): array
+{
+    $card['rating_details'] = ratingDetails($card);
+    return $card;
+}
+
+function syncTaskStatus(PDO $db, int $taskId): void
+{
+    $db->prepare("UPDATE tasks SET status = CASE WHEN EXISTS
+        (SELECT 1 FROM cards WHERE task_id = ? AND published = 1)
+        THEN 'published' ELSE 'draft' END WHERE id = ?")->execute([$taskId, $taskId]);
 }
 
 function findRow(PDO $db, string $table, int $id): array

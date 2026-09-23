@@ -14,11 +14,8 @@ try {
     $db = require __DIR__ . '/db.php';
     require_once __DIR__ . '/rating.php';
     $db->exec('PRAGMA busy_timeout = 5000');
-    $schema = file_get_contents(__DIR__ . '/schema.sql');
-    if ($schema === false) {
-        throw new RuntimeException('Не удалось прочитать schema.sql');
-    }
-    $db->exec($schema);
+    require_once __DIR__ . '/lib/migrations.php';
+    migrateDatabase($db);
     $db->exec('BEGIN IMMEDIATE');
     $locked = true;
     foreach (['tasks', 'cards', 'teams', 'proposals'] as $table) {
@@ -32,7 +29,7 @@ try {
     $fields = ['context', 'data_materials', 'expected_result', 'success_criteria', 'constraints', 'users', 'business_contact'];
     $columns = [
         'tasks' => ['id', 'raw_description', 'status'],
-        'cards' => array_merge(['id', 'task_id'], $fields, array_map(function ($f) { return $f . '_confirmed'; }, $fields), ['rating', 'readiness_level', 'published']),
+        'cards' => array_merge(['id', 'task_id', 'title', 'topic', 'need', 'interaction_format'], $fields, array_map(function ($f) { return $f . '_confirmed'; }, $fields), ['rating', 'readiness_level', 'published']),
         'teams' => ['id', 'name', 'interests', 'skills', 'technologies'],
         'proposals' => ['id', 'card_id', 'team_id', 'solution_idea', 'plan', 'prototype_link', 'deadline', 'chosen'],
     ];
@@ -52,6 +49,9 @@ try {
                 throw new RuntimeException('Некорректная запись: ' . $table);
             }
             if ($table === 'cards') {
+                foreach (['title', 'topic', 'need', 'interaction_format'] as $extra) {
+                    $row[$extra] = $row[$extra] ?? '';
+                }
                 $rating = calculateRating($row);
                 $row['rating'] = $rating['rating'];
                 $row['readiness_level'] = $rating['level'];
@@ -69,6 +69,9 @@ try {
             $stmt->execute($values);
         }
     }
+    $db->exec("UPDATE tasks SET status = CASE WHEN EXISTS
+        (SELECT 1 FROM cards WHERE task_id = tasks.id AND published = 1)
+        THEN 'published' ELSE 'draft' END");
     $db->exec('COMMIT');
     $locked = false;
     echo json_encode(['status' => 'created', 'tasks' => 5, 'cards' => 5, 'teams' => 5, 'proposals' => 5], JSON_UNESCAPED_UNICODE) . PHP_EOL;
