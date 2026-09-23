@@ -46,4 +46,4 @@ AI Sana — MVP платформы для связи бизнеса и кома�
 │   ├── cards_seed.json
 │   ├── teams_seed.json
 │   └── proposals_seed.json
-└── README.md
+└── README.mdd
