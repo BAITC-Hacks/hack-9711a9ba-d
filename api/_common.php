@@ -1,0 +1,113 @@
+<?php
+declare(strict_types=1);
+
+ini_set('display_errors', '0');
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+function respond($data, int $status = 200): void
+{
+    $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+    http_response_code($status);
+    echo $json;
+}
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    respond(['ok' => true]);
+    exit;
+}
+
+class ApiError extends RuntimeException {}
+
+const CARD_FIELDS = ['context', 'data_materials', 'expected_result',
+    'success_criteria', 'constraints', 'users', 'business_contact'];
+
+function fail(string $message, int $status = 400): void
+{
+    throw new ApiError($message, $status);
+}
+
+function body(): array
+{
+    try {
+        $value = json_decode(file_get_contents('php://input'), false, 512, JSON_THROW_ON_ERROR);
+    } catch (JsonException $e) {
+        fail('Некорректный JSON');
+    }
+    if (!$value instanceof stdClass) {
+        fail('Тело запроса должно быть JSON-объектом');
+    }
+    return (array) $value;
+}
+
+function onlyKeys(array $data, array $allowed): void
+{
+    if (array_diff(array_keys($data), $allowed)) {
+        fail('Переданы неподдерживаемые поля');
+    }
+}
+
+function positiveId($value, string $name = 'id'): int
+{
+    if ((!is_int($value) && !is_string($value)) ||
+        !preg_match('/^[1-9][0-9]*$/D', (string) $value) ||
+        filter_var($value, FILTER_VALIDATE_INT) === false) {
+        fail('Поле ' . $name . ' должно быть положительным целым числом');
+    }
+    return (int) $value;
+}
+
+function textField(array $data, string $name, bool $required = false): string
+{
+    $value = $data[$name] ?? '';
+    if (!is_string($value) || ($required && trim($value) === '')) {
+        fail('Поле ' . $name . ' должно содержать ' . ($required ? 'непустую строку' : 'строку'));
+    }
+    return trim($value);
+}
+
+function findRow(PDO $db, string $table, int $id): array
+{
+    // Table names come only from endpoint code, never from user input.
+    $stmt = $db->prepare("SELECT * FROM $table WHERE id = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
+    if (!$row) {
+        fail('Запись не найдена: ' . $table, 404);
+    }
+    return $row;
+}
+
+function transaction(PDO $db, callable $action)
+{
+    $db->exec('BEGIN IMMEDIATE');
+    try {
+        $result = $action();
+        $db->exec('COMMIT');
+        return $result;
+    } catch (Throwable $e) {
+        $db->exec('ROLLBACK');
+        throw $e;
+    }
+}
+
+function api(array $methods, callable $action): void
+{
+    try {
+        $method = $_SERVER['REQUEST_METHOD'] ?? '';
+        if (!in_array($method, $methods, true)) {
+            header('Allow: ' . implode(', ', array_merge($methods, ['OPTIONS'])));
+            fail('Метод не поддерживается', 405);
+        }
+        $db = require __DIR__ . '/../db.php';
+        $db->exec('PRAGMA busy_timeout = 5000');
+        $action($db, $method);
+    } catch (ApiError $e) {
+        respond(['error' => $e->getMessage()], $e->getCode());
+    } catch (Throwable $e) {
+        error_log((string) $e);
+        respond(['error' => 'Внутренняя ошибка сервера. Проверьте инициализацию БД и журнал PHP.'], 500);
+    }
+}
