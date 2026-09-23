@@ -12,7 +12,6 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
     $data = body();
     $editable = array_merge(CARD_FIELDS, CARD_METADATA);
     if ($method === 'POST') {
-<<<<<<< HEAD
         // AI preparation happens before the short SQLite write transaction.
         // The source description always comes from the saved task.
         if (array_key_exists('action', $data)) {
@@ -40,10 +39,7 @@ api(['GET', 'POST', 'PATCH'], function (PDO $db, string $method): void {
                 fail($e->getMessage(), 422);
             }
         }
-        onlyKeys($data, array_merge(['task_id'], CARD_FIELDS));
-=======
         onlyKeys($data, array_merge(['task_id'], $editable));
->>>>>>> 25ac8e155d5d284ffc5d83eac333bc3c72bfe9c9
         $taskId = positiveId($data['task_id'] ?? null, 'task_id');
         $values = [$taskId];
         foreach ($editable as $field) {

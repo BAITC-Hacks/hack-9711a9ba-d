@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-<<<<<<< HEAD
+require_once __DIR__ . '/rating.php';
 
 /** Standalone helper: no database, session, headers or team-selection access. */
 const AI_CARD_FIELDS = ['context', 'data_materials', 'expected_result',
@@ -405,8 +405,7 @@ function aiAssertSafe(string $text): void
     if ($errors) {
         throw new InvalidArgumentException(implode(' ', $errors));
     }
-=======
-require_once __DIR__ . '/rating.php';
+}
 
 /** Local deterministic fallback. It does not call or train a language model. */
 function draftFields(): array
@@ -492,5 +491,4 @@ function localAssistant(string $description, array $answers): array
 {
     $card = buildCardDraft($description, $answers);
     return validateAssistantOutput(['card' => $card, 'questions' => clarificationQuestions($card)], $description, $answers);
->>>>>>> 25ac8e155d5d284ffc5d83eac333bc3c72bfe9c9
 }

@@ -37,8 +37,7 @@ CORS Access-Control-Allow-Origin: *. Запросы используют под�
 
 ## Черновики и уточняющие вопросы
 
-<<<<<<< HEAD
-ИИ-помощник также возвращает 422 при некорректных ответах бизнеса или обнаружении
+ИИ-действия `questions` и `build` в `cards.php` также возвращают 422 при некорректных ответах бизнеса или обнаружении
 персональных данных/формулировок выбора команд. Ошибки внешнего AI API включают
 локальный fallback. Настройка, контракты и ограничения: [AI_HELPER.md](AI_HELPER.md).
 
@@ -46,7 +45,7 @@ CORS Access-Control-Allow-Origin: *. Запросы используют под�
 |---|---|---|
 | api/tasks.php | POST | `{"raw_description":"Нужен прогноз продаж"}` → `{"task_id":6}` |
 | api/tasks.php | GET | `?id=6` |
-| api/cards.php | POST | `{"task_id":6}` → `{"card_id":6}`; дополнительно можно передать семь текстовых полей |
+| api/cards.php | POST | `{"task_id":6}` → `{"card_id":6}`; дополнительно можно передать 11 текстовых полей |
 | api/cards.php | POST | `{"action":"questions","task_id":6}` → `{"task_id":6,"questions":[{"field":"context","question":"... ?"}, ...]}`; минимум 3 вопроса |
 | api/cards.php | POST | `{"action":"build","task_id":6,"answers":{"users":"Управляющий магазина."}}` → `{"card_id":6}`; структурирование и проверка перед сохранением |
 | api/cards.php | PATCH | `{"id":6,"field":"context","value":"Прогноз продаж магазина"}`; id также можно передать через `?id=6` |
@@ -57,13 +56,12 @@ CORS Access-Control-Allow-Origin: *. Запросы используют под�
 | api/proposals.php | POST | `{"card_id":3,"team_id":6,"solution_idea":"Поиск по FAQ","plan":"Анализ, прототип, проверка","prototype_link":"","deadline":"2026-10-15"}` → `{"proposal_id":6}` |
 | api/proposals.php | GET | `?card_id=3` |
 | api/choose.php | PATCH | `{"proposal_id":6}` — явное ручное действие бизнеса |
-=======
+
 - `POST /api/tasks.php`: `{"raw_description":"Нужен прогноз спроса для кафе"}` → `{"task_id":6}`.
 - `GET /api/tasks.php?id=6`: черновик. Без id — список всех черновиков/задач, новые первыми.
 - `GET /api/questions.php?task_id=6`: минимум три вопроса, provider и rating_details.
 - `POST /api/questions.php`: `{"task_id":6,"card_id":6}` — вопросы по текущей карточке;
   card_id необязателен, принадлежность черновику проверяется. GET поддерживает те же параметры.
->>>>>>> 25ac8e155d5d284ffc5d83eac333bc3c72bfe9c9
 
 Вопросы сначала относятся к пустым и неподтверждённым полям. Если все поля заполнены
 и подтверждены, возвращаются три вопроса для проверки актуальности.
@@ -159,8 +157,13 @@ accepted — принять (chosen=1); rejected — отклонить (chosen=
 
 ## Локальный помощник
 
-ai_helper.php — детерминированная заглушка, разрешённая ТЗ при недоступности внешнего AI.
-Это не внешняя языковая модель и не обучение собственной модели. provider всегда local_stub.
+`questions.php` и `generate.php` используют детерминированные функции
+`clarificationQuestions()` и `localAssistant()` из `ai_helper.php`.
+Для этих endpoints provider всегда `local_stub`; они поддерживают семь полей и четыре метаполя.
+Отдельные действия `questions`/`build` в `cards.php` используют `generateQuestions()` и
+`buildCardFromAnswers()`: внешний API при наличии `AI_API_KEY`, иначе локальный fallback.
+Для `build` ответы ограничены семью основными полями; метаполя редактируются через PATCH.
+Настройка внешнего API и дополнительные проверки описаны в [AI_HELPER.md](AI_HELPER.md).
 Промпт и контракт будущего подключения: prompts/card_assistant.txt.
 Результат проверяется до вставки в БД: структура, количество и поля вопросов,
 строковые значения и точное совпадение фактов с исходным описанием/ответами. Невалидный

@@ -41,6 +41,7 @@ def main():
             shutil.copy2(source / name, root / name)
         shutil.copytree(source / "api", root / "api")
         shutil.copytree(source / "data", root / "data")
+        shutil.copytree(source / "lib", root / "lib")
         subprocess.run(command + ["seed.php"], cwd=root, env=env, check=True, capture_output=True)
         with closing(sqlite3.connect(root / "database.sqlite")) as db:
             baseline = db.execute("SELECT id, chosen FROM proposals ORDER BY id").fetchall()
